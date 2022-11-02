@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MMU 模拟, JerryMouse">
+    <meta name="keywords" content="v8, JerryMouse">
     <meta name="description" content="Lazy">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MMU 模拟 | JerryMouse</title>
+    <title>v8 | JerryMouse</title>
     <link rel="icon" type="image/jpeg" href="/rali_head.jpeg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -314,12 +314,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MMU 模拟</h1>
+                    <h1 class="description center-align post-title">v8</h1>
                 </div>
             </div>
         </div>
@@ -353,7 +353,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-04-10
+                    2022-04-22
                 </div>
                 
 
@@ -382,51 +382,121 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在一个基础的只能执行普通指令的模拟器中添加访问内存的功能。</p>
-<p>项目文件如下:</p>
-<pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell">dataStructure.h
-  定义了PCB和文件跟踪的数据结构
-fileIO.h
-fileIO.c
-读取输入文件以及写入最终结果
-simulator.c
-  init()
-    初始化各种数据结构
-  simulate()
-    主体程序，模拟每一个进程的执行。
-  diskToMemory()
-    从硬盘中读取一个页面到磁盘中。
-  readPage()
-    执行一条访存或者计算指令
-  mmu.h
-  mmu.c
-    页表，页面地址翻译，OS内存管理以及TLB模拟<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>最近需要做一个关于node persistent and sharing code cache的项目，所以需要详细地了解v8 optimized code cache生成和管理的一个过程。但是确实好难啊，看了几周也没有什么进展。这里做一个较为详细的介绍，以便以后查阅。</p>
+<h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>node是需要调用v8的API的，如果v8的版本和node的版本不一致的话编译会有问题。在编译好的node中输入以下指令, 可以得到v8的版本，以便直接在v8上进行更改和debug。</p>
+<pre class="line-numbers language-none"><code class="language-none">node -p process.versions.v8<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h3 id="Base-simulator"><a href="#Base-simulator" class="headerlink" title="Base simulator"></a>Base simulator</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>这里指的是需要我们在这基础上进行修改的代码。基础模拟器会读取输入的指令，并读取进程的信息，包括指令序列和指令类型。</p>
-<h4 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h4><p>该模拟器是一个多进程的模拟器，所以需要进程调度的一些内容。根据三种状态模型简要的把进程分为就绪(ready), 阻塞(blocked), 以及运行(running)。在程序开始时，将所有进程装入就绪队列，随后，当没有正在运行的程序时，将就绪队列取出第一个进程加入运行队列，然后开始执行。</p>
-<p>那么执行到什么时候呢，当以下事件发生，需要进行调度。</p>
-<ol>
-<li>时间片耗尽</li>
-<li>发生了中断(在这里指硬盘中断)</li>
-<li>Page fault导致无法继续执行。</li>
-<li>程序运行结束。</li>
-</ol>
-<p>当发生了以上事件时，需要进行调度，调度方法就是把运行队列的第一个元素加入就绪队列的队尾(除非它已经完成了), 然后将就绪队列的第一个元素设置为运行状态。</p>
-<h3 id="需要增加的内容"><a href="#需要增加的内容" class="headerlink" title="需要增加的内容"></a>需要增加的内容</h3><p>我们在这基础上需要增加内存访问的实现。包括虚拟地址到物理地址的翻译，Page fault的触发和处理，磁盘模拟，以及MMU的模拟</p>
-<h4 id="MMU实现"><a href="#MMU实现" class="headerlink" title="MMU实现"></a>MMU实现</h4><p>在输入的参数中有一级到三级页表不定的输入，而且每一级页表的长度不是固定的，因此需要给出一个兼容性的实现。那么地址翻译的过程就是取出N1_bits，然后作为数组下标访问第二级页表，再取出N2_bits去访问第三级页表，取出N3_bits去访问物理页，最后通过页偏移确定在物理页中的物理地址。</p>
-<h4 id="Page-fault的触发和处理。"><a href="#Page-fault的触发和处理。" class="headerlink" title="Page fault的触发和处理。"></a>Page fault的触发和处理。</h4><p>当最后一级页表的页表项的最低位(present位)为0时，说明页面不存在，页面访问无法进行下去，那就会触发page fault。page fault需要向磁盘发出请求，等待磁盘进行处理。随后进程进入阻塞队列。</p>
-<h4 id="磁盘模拟"><a href="#磁盘模拟" class="headerlink" title="磁盘模拟"></a>磁盘模拟</h4><p>一旦磁盘处理完磁盘请求，将触发磁盘中断。在中断处理中，操作系统将申请一个新的物理页，并把数据读入物理页，然后填上对应的最后一级页表项。然后该阻塞的进程就会被移入就绪队列的队尾了。</p>
-<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p>内存管理包括物理页的申请和释放。这里包括两种策略。这里空闲物理页和正在使用的物理页都由双向链表来维护。</p>
-<h5 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h5><p>LRU保证释放的页面是最久没有使用的页面了。LRU为了效率，还需要一个哈希表来快速定位双向链表。哈希表的key是物理页地址，value是双向链表的链表项。每当进行一次内存访问，LRU需要将该物理页移动到正在使用的页面的队尾，然后进行页面替换时替换掉第一个物理页。</p>
-<h5 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h5><p>Clock算法是LRU算法的一种简单实现。在链表项中增加一个使用标记。访问一个页面时将标记置为true。需要进行页面置换时从链表头开始遍历，遇到true的标记就全部设置为false，如果遇到false的页面就将其置换。随后把链表的首尾相连，将链表尾设置为当前节点的前一个节点，链表头设置为下一个节点。</p>
-<h5 id="页面分配"><a href="#页面分配" class="headerlink" title="页面分配"></a>页面分配</h5><p>如果有空闲的物理页，也就是free_pages不为空的话，从空闲物理页取下一页用来分配。如果没有空闲的物理页，就调用LRU或者Clock算法进行页面置换。</p>
-<h5 id="页面释放"><a href="#页面释放" class="headerlink" title="页面释放"></a>页面释放</h5><p>将一个物理页从正在使用的链表移动到空闲链表即可。同时将哈希表项置为NULL</p>
-<h3 id="TLB实现"><a href="#TLB实现" class="headerlink" title="TLB实现"></a>TLB实现</h3><p>假设有三级页表，那么一次内存指令需要访问四次内存。那么如果有TLB的话使用TLB记录最近使用的页表项，就能快速定位到物理页。<br>TLB表项为虚拟页地址以及物理页地址。然后还需要一个有效位标记。</p>
-<p>这里的TLB也用双向链表实现，每次访存时遍历一次TLB，如果有匹配的返回对应的物理页地址；否则TLB Miss，需要在访存以后填入TLB。将TLB表项移动到队列末尾，使用LRU算法进行置换。</p>
-<p>在进行进程切换的时候，需要将TLB刷掉，因为不同进程的地址空间不一样。</p>
-<h2 id="其它遇到的小问题"><a href="#其它遇到的小问题" class="headerlink" title="其它遇到的小问题"></a>其它遇到的小问题</h2><h3 id="Clion中找不到函数定义的问题"><a href="#Clion中找不到函数定义的问题" class="headerlink" title="Clion中找不到函数定义的问题"></a>Clion中找不到函数定义的问题</h3><p>Clion中通过CMakeList.txt进行项目文件的定位，要么创建一个CMakeList.txt，要么将Makefile转化成compile_command.json，然后在打开项目的时候打开CMakeList.txt或者compile_command.json，就可以找到符号了。</p>
-<h3 id="readline内存泄漏的问题"><a href="#readline内存泄漏的问题" class="headerlink" title="readline内存泄漏的问题"></a>readline内存泄漏的问题</h3><p>readline会分配内存到你给定的指针里，但是这个指针指向的内存是需要你手动释放的，如果没有释放会造成内存泄漏。</p>
+<h2 id="V8的编译"><a href="#V8的编译" class="headerlink" title="V8的编译"></a>V8的编译</h2><p>直接git clone的v8是不能编译的，需要同步以下三个文件夹<br><code>build</code>, <code>buildtools</code>, <code>tools/clang</code>, <code>third_paty</code>。</p>
+<h2 id="IDE问题"><a href="#IDE问题" class="headerlink" title="IDE问题"></a>IDE问题</h2><p>v8官方推荐的是用vscode，不过vscode找引用函数的地方还是用点问题，特别是被重载过的会找错。但是clion不太好支持ninja，需要自己编写CMakeLists.txt。</p>
+<h2 id="已经支持的API"><a href="#已经支持的API" class="headerlink" title="已经支持的API"></a>已经支持的API</h2><p>v8本身就是支持CodeCache的，在api.cc中有CreateCodeCache的实现。下面是v8暴露给外层使用，比如可以给node使用的api。看起来还能支持Serialize。</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; Create Code Cache
+ScriptCompiler::CachedData* ScriptCompiler::CreateCodeCache(
+    Local&lt;UnboundScript&gt; unbound_script) &#123;
+  i::Handle&lt;i::SharedFunctionInfo&gt; shared &#x3D;
+      i::Handle&lt;i::SharedFunctionInfo&gt;::cast(
+          Utils::OpenHandle(*unbound_script));
+  ASSERT_NO_SCRIPT_NO_EXCEPTION(shared-&gt;GetIsolate());
+  DCHECK(shared-&gt;is_toplevel());
+  return i::CodeSerializer::Serialize(shared);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>还有在Compile的过程中使用code cache的。</p>
+<pre class="line-numbers language-none"><code class="language-none"> i::MaybeHandle&lt;i::SharedFunctionInfo&gt; maybe_function_info;
+2504   if (options &#x3D;&#x3D; kConsumeCodeCache) &#123;
+2505     if (source-&gt;consume_cache_task) &#123;
+2506       &#x2F;&#x2F; Take ownership of the internal deserialization task and clear it off
+2507       &#x2F;&#x2F; the consume task on the source.
+2508       DCHECK_NOT_NULL(source-&gt;consume_cache_task-&gt;impl_);
+2509       std::unique_ptr&lt;i::BackgroundDeserializeTask&gt; deserialize_task &#x3D;
+2510           std::move(source-&gt;consume_cache_task-&gt;impl_);
+2511       maybe_function_info &#x3D;
+2512           i::Compiler::GetSharedFunctionInfoForScriptWithDeserializeTask(
+2513               isolate, str, script_details, deserialize_task.get(), options,
+2514               no_cache_reason, i::NOT_NATIVES_CODE);
+2515       source-&gt;cached_data-&gt;rejected &#x3D; deserialize_task-&gt;rejected();
+2516     &#125; else &#123;
+2517       DCHECK(source-&gt;cached_data);
+2518       &#x2F;&#x2F; AlignedCachedData takes care of pointer-aligning the data.
+2519       auto cached_data &#x3D; std::make_unique&lt;i::AlignedCachedData&gt;(
+2520           source-&gt;cached_data-&gt;data, source-&gt;cached_data-&gt;length);
+2521       maybe_function_info &#x3D;
+2522           i::Compiler::GetSharedFunctionInfoForScriptWithCachedData(
+2523               isolate, str, script_details, cached_data.get(), options,
+2524               no_cache_reason, i::NOT_NATIVES_CODE);
+2525       source-&gt;cached_data-&gt;rejected &#x3D; cached_data-&gt;rejected();
+2526     &#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="Code-Cache类"><a href="#Code-Cache类" class="headerlink" title="Code Cache类"></a>Code Cache类</h2><p>在v8的<code>compilation-cache.h</code>中，有关于CodeCache实现的类，有一个SubCache的基类，以及不同的cache，包括scriptcache和evalcache, regexpcache。我猜测scriptcache应该是function cache，但是eval是什么有点奇怪。然后应该是对正则表达式有特殊的优化。cache最后会对应几张表，用表来管理Cache的创建销毁和查询。</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; The compilation cache consists of several generational sub-caches which uses
+&#x2F;&#x2F; this class as a base class. A sub-cache contains a compilation cache tables
+&#x2F;&#x2F; for each generation of the sub-cache. Since the same source code string has
+&#x2F;&#x2F; different compiled code for scripts and evals, we use separate sub-caches
+&#x2F;&#x2F; for different compilation modes, to avoid retrieving the wrong result.
+class CompilationSubCache &#123;
+ public:
+  CompilationSubCache(Isolate* isolate, int generations)
+      : isolate_(isolate), generations_(generations) &#123;
+    DCHECK_LE(generations, kMaxGenerations);
+  &#125;
+
+  static constexpr int kFirstGeneration &#x3D; 0;
+  static constexpr int kMaxGenerations &#x3D; 2;
+
+  &#x2F;&#x2F; Get the compilation cache tables for a specific generation.
+  Handle&lt;CompilationCacheTable&gt; GetTable(int generation);
+
+  &#x2F;&#x2F; Accessors for first generation.
+  Handle&lt;CompilationCacheTable&gt; GetFirstTable() &#123;
+    return GetTable(kFirstGeneration);
+  &#125;
+  void SetFirstTable(Handle&lt;CompilationCacheTable&gt; value) &#123;
+    DCHECK_LT(kFirstGeneration, generations_);
+    tables_[kFirstGeneration] &#x3D; *value;
+  &#125;
+  ......
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后会对应到表</p>
+<pre class="line-numbers language-none"><code class="language-none">Handle&lt;CompilationCacheTable&gt; CompilationCacheTable::PutScript(
+    Handle&lt;CompilationCacheTable&gt; cache, Handle&lt;String&gt; src,
+    LanguageMode language_mode, Handle&lt;SharedFunctionInfo&gt; value,
+    Isolate* isolate) &#123;
+  src &#x3D; String::Flatten(isolate, src);
+  StringSharedKey key(src, language_mode);
+  Handle&lt;Object&gt; k &#x3D; key.AsHandle(isolate);
+  cache &#x3D; EnsureCapacity(isolate, cache);
+  InternalIndex entry &#x3D; cache-&gt;FindInsertionEntry(isolate, key.Hash());
+  cache-&gt;set(EntryToIndex(entry), *k);
+  cache-&gt;set(EntryToIndex(entry) + 1, *value);
+  cache-&gt;ElementAdded();
+  return cache;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>根据<a target="_blank" rel="noopener" href="https://v8.dev/blog/improved-code-caching%EF%BC%8Cv8%E7%9B%AE%E5%89%8D%E4%B9%9F%E6%9C%89code">https://v8.dev/blog/improved-code-caching，v8目前也有code</a> cache，能够持久化的code cache是基于url作为key保存的。不过上面那个代码的PutScript一层一层往上，确实也用在了compile的地方。</p>
+<p>但是我们应该可以在需要的地方做code cache，最合适的地方是在compile的位置，那我们就不得不弄清楚compile的过程。<br>优化等级有三种</p>
+<pre class="line-numbers language-none"><code class="language-none">case CodeKind::INTERPRETED_FUNCTION:
+  name &#x3D; &quot;interpreter&quot;;
+  break;
+case CodeKind::BASELINE:
+  name &#x3D; &quot;baseline&quot;;
+  break;
+case CodeKind::TURBOFAN:
+  name &#x3D; &quot;optimize&quot;;
+  break;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>编译的tag也有几种</p>
+<pre class="line-numbers language-none"><code class="language-none">case CodeEventListener::EVAL_TAG:
+  name +&#x3D; &quot;-eval&quot;;
+  break;
+case CodeEventListener::SCRIPT_TAG:
+  break;
+case CodeEventListener::LAZY_COMPILE_TAG:
+  name +&#x3D; &quot;-lazy&quot;;
+  break;
+case CodeEventListener::FUNCTION_TAG:
+  break;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>CompilationJob</p>
+<pre class="line-numbers language-none"><code class="language-none"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -452,7 +522,7 @@ simulator.c
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://jerrymousez.github.io/2021/04/10/MMU-%E6%A8%A1%E6%8B%9F/">http://jerrymousez.github.io/2021/04/10/MMU-%E6%A8%A1%E6%8B%9F/</a>
+                    <a href="http://jerrymousez.github.io/2022/04/22/v8/">http://jerrymousez.github.io/2022/04/22/v8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -535,13 +605,13 @@ simulator.c
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/04/22/%E7%BB%88%E7%AB%AF%E7%99%BB%E5%BD%95%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+                <a href="/2022/09/14/pwrite/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="终端登录校园网的小程序">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="pwrite">
                         
-                        <span class="card-title">终端登录校园网的小程序</span>
+                        <span class="card-title">pwrite</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -552,7 +622,7 @@ simulator.c
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-14
                         </span>
                         <span class="publish-author">
                             
@@ -572,13 +642,13 @@ simulator.c
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/25/%E6%8A%96%E9%9F%B3%E7%94%B5%E5%95%86%E4%B8%80%E9%9D%A2/">
+                <a href="/2022/04/21/leetcode-H2O%E7%94%9F%E6%88%90/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="抖音电商一面">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="leetcode H2O生成">
                         
-                        <span class="card-title">抖音电商一面</span>
+                        <span class="card-title">leetcode H2O生成</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -589,19 +659,35 @@ simulator.c
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9D%A2%E7%BB%8F/" class="post-category">
-                                    面经
+                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
+                                    多线程
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">多线程</span>
+                    </a>
+                    
+                    <a href="/tags/leetcode/">
+                        <span class="chip bg-color">leetcode</span>
+                    </a>
+                    
                 </div>
                 
             </div>

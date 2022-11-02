@@ -354,6 +354,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E7%8E%AF%E5%A2%83/" class="post-category">
+                                环境
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -361,7 +370,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-04-18
+                    2022-04-21
                 </div>
                 
 
@@ -390,67 +399,42 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>manjaro是基于ArchLinux的一种Linux发行版，目前好像挺火的。因为之前笔记本Ubuntu一直有键盘隔半个小时卡一次的问题，忍了快一个学期了，还是换成来manjaro。想我这样经常折腾的人还是尽量减少耗在配环境上面的时间吧，尽量用基础配置，追求简单易用。</p>
+                <p>最近经常重装系统，每次重装都得重新配一次环境，很烦，不如把环境配置都写在脚本里，这样可以快速安装。项目地址在<a target="_blank" rel="noopener" href="https://github.com/JerryMouseZ/manjaro-settings">https://github.com/JerryMouseZ/manjaro-settings</a></p>
+<p>这些配置包括里基本的编程环境，常用的软件包括网易云音乐，中文拼音输入法，微信，科学上网以及vim，双系统时间的配置。可能还是有bug，不过尽量在微调的情况下能用吧。<br>manjaro是基于ArchLinux的一种Linux发行版，目前好像挺火的。因为之前笔记本Ubuntu一直有键盘隔半个小时卡一次的问题，忍了快一个学期了，还是换成来manjaro。想我这样经常折腾的人还是尽量减少耗在配环境上面的时间吧，尽量用基础配置，追求简单易用。</p>
 <h2 id="介质准备"><a href="#介质准备" class="headerlink" title="介质准备"></a>介质准备</h2><p>manjaro有三中图形界面，因为从Ubuntu过来的，还是GNome会过度快一点，就选Gnome了。刻录U盘用的rufus。</p>
 <h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p>因为笔记本有英伟达显卡，驱动记得选non-free，后面就不会遇到什么问题了。如果喜欢重装的人其实应该手动分区的，这样可以保留之前的数据。不过我不太会，还是让他自动分区了，让他替换原本ubuntu的分区。</p>
 <h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>sudo pacman-mirrors -i -c China -m rank</p>
-<p>记得不要随意更新，我更新完之后好像glibc又蹦了，结果又重装了一次。</p>
-<h2 id="中文输入法"><a href="#中文输入法" class="headerlink" title="中文输入法"></a>中文输入法</h2><p>用fcitx5就可以了，可以选择rtime或者add-ons<br>sudo pacman -S yay<br>yay -S fcitx5-im fcitx5-rime rime-cloverpinyin yay -S fcitx5-pinyin-zhwiki-rime yay -S fcitx5-material-color</p>
-<p>vi ~&#x2F;.pam_environment</p>
-<pre class="line-numbers language-none"><code class="language-none">GTK_IM_MODULE DEFAULT&#x3D;fcitx
-QT_IM_MODULE  DEFAULT&#x3D;fcitx
-XMODIFIERS    DEFAULT&#x3D;@im&#x3D;fcitx
-SDL_IM_MODULE DEFAULT&#x3D;fcitx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="关于key的问题"><a href="#关于key的问题" class="headerlink" title="关于key的问题"></a>关于key的问题</h2><p>ArchLinux使用签名验证软件包，如果遇到里key出现问题会非常麻烦，我整了一天没整好，最后直接选择放弃认证了。方法是修改&#x2F;etc&#x2F;pacman.conf<br>找到<code>SigLevel</code>所在的行，修改为</p>
+<pre class="line-numbers language-none"><code class="language-none">SigLevel &#x3D; TrustAll<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>vi ~&#x2F;.local&#x2F;share&#x2F;fcitx5&#x2F;rime&#x2F;default.custom.yaml</p>
-<pre class="line-numbers language-none"><code class="language-none">patch:
-&quot;menu&#x2F;page_size&quot;: 5
-schema_list:
-  - schema: clover<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>yay -S fcitx5-material-color</p>
-<h2 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h2><p>vim-plus 项目一键配好<br>环境准备 make和cmake</p>
-<pre class="line-numbers language-none"><code class="language-none">yay -S make cmake<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none">git clone https:&#x2F;&#x2F;github.com&#x2F;chxuan&#x2F;vimplus.git ~&#x2F;.vimplus
-cd ~&#x2F;.vimplus
-.&#x2F;install.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="中文输入法"><a href="#中文输入法" class="headerlink" title="中文输入法"></a>中文输入法</h2><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">source pinyin.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h2><p>snap install pycharm-professional –classic<br>snap install clion –classic<br>code 还是不要用snap里面的了，去官网下一个.tar.gz,然后解压也能用。</p>
-<h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><p>sudo pacman -S npm<br>npm i -g cnpm<br>cnpm i -g hexo-cli</p>
-<h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell">pacman -S docker
-usermod -aG docker $USER
-pacman -S docker-compose<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h2><pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell"># docker pull bestwu&#x2F;wechat
-xhost +
-docker run -d --name wechat --device &#x2F;dev&#x2F;snd --ipc&#x3D;host \
--v &#x2F;tmp&#x2F;.X11-unix:&#x2F;tmp&#x2F;.X11-unix \
--v $HOME&#x2F;WeChatFiles:&#x2F;WeChatFiles \
--e DISPLAY&#x3D;unix$DISPLAY \
--e XMODIFIERS&#x3D;@im&#x3D;fcitx5 \
--e QT_IM_MODULE&#x3D;fcitx5 \
--e GTK_IM_MODULE&#x3D;fcitx5 \
--e AUDIO_GID&#x3D;&#96;getent group audio | cut -d: -f3&#96; \
--e GID&#x3D;&#96;id -g&#96; \
--e UID&#x3D;&#96;id -u&#96; \
-bestwu&#x2F;wechat
+<h2 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h2><p>vim的配置基于vimplus项目魔改，因为作者好像很久不更新了，YCM会出现一点问题。</p>
+<pre class="line-numbers language-none"><code class="language-none">source vim.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-docker stop wechat
-docker start wechat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h2><p>包括了snap的配置，以及clion, pycharm, vscode的安装。vscode的安装参考了v8的教程。</p>
+<pre class="line-numbers language-none"><code class="language-none">source ide.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="Qv2ray"><a href="#Qv2ray" class="headerlink" title="Qv2ray"></a>Qv2ray</h2><p>sudo pacman -Syy qv2ray # or qv2ray-dev-git, see below.</p>
-<h2 id="底部条"><a href="#底部条" class="headerlink" title="底部条"></a>底部条</h2><p>yay -S plank</p>
+<h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><p>使用hexo搭建博客</p>
+<pre class="line-numbers language-none"><code class="language-none">source blog.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell">source docker.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="微信"><a href="#微信" class="headerlink" title="微信"></a>微信</h2><p>因为arch官方的微信好像有一点问题，但是使用deepin-wine5构建的微信是没有bug的，所以选择自己构建。</p>
+<pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell">source wechat.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h2><p>目前linux最好用的客户端是v2raya</p>
+<pre class="line-numbers language-none"><code class="language-none">source v2ray.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Gnome配置"><a href="#Gnome配置" class="headerlink" title="Gnome配置"></a>Gnome配置</h2><p>有时候可能会遇到gnome的一些bug，比如布局修改不生效，以及任务栏找不到之类的，估计是缺少了gnome的插件</p>
+<pre class="line-numbers language-none"><code class="language-none">source gnome.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a>开机启动</h2><p>在tweaks的startup中</p>
-<h2 id="双系统同步时间"><a href="#双系统同步时间" class="headerlink" title="双系统同步时间"></a>双系统同步时间</h2><p>timedatectl set-local-rtc 1<br>hwclock –systohc</p>
-<h2 id="zsh额外配置"><a href="#zsh额外配置" class="headerlink" title="zsh额外配置"></a>zsh额外配置</h2><pre class="line-numbers language-none"><code class="language-none"># 用来显示git分支
-autoload -Uz vcs_info
-precmd_vcs_info() &#123; vcs_info &#125;
-precmd_functions+&#x3D;( precmd_vcs_info )
-setopt prompt_subst
-RPROMPT&#x3D;\$vcs_info_msg_0_
-# PROMPT&#x3D;\$vcs_info_msg_0_&#39;%# &#39;
-zstyle &#39;:vcs_info:git:*&#39; formats &#39;%b&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="双系统同步时间"><a href="#双系统同步时间" class="headerlink" title="双系统同步时间"></a>双系统同步时间</h2><p>取消Linux的+8，并同步到硬件时间</p>
+<pre class="line-numbers language-none"><code class="language-none">source time.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="开机自动挂载硬盘"><a href="#开机自动挂载硬盘" class="headerlink" title="开机自动挂载硬盘"></a>开机自动挂载硬盘</h2><p>sudo vi &#x2F;etc&#x2F;fstab</p>
+<h2 id="开机自动挂载硬盘"><a href="#开机自动挂载硬盘" class="headerlink" title="开机自动挂载硬盘"></a>开机自动挂载硬盘</h2><p>修改 <code>/etc/fstab</code>文件</p>
 <pre class="line-numbers language-none"><code class="language-none"># &lt;file system&gt;             &lt;mount point&gt;  &lt;type&gt;  &lt;options&gt;  &lt;dump&gt;  &lt;pass&gt;
 UUID&#x3D;7A90-4B4B                            &#x2F;boot&#x2F;efi      vfat    umask&#x3D;0077 0 2
 UUID&#x3D;83a985ad-4bda-4d15-be60-1164b46bc29e &#x2F;              ext4    defaults,noatime 0 1
@@ -458,10 +442,12 @@ UUID&#x3D;D0405C2B405C1A94                     &#x2F;run&#x2F;media&#x2F;jz&#x2F
 UUID&#x3D;FAEC90F5EC90ACFF                     &#x2F;run&#x2F;media&#x2F;jz&#x2F;Windows-SSD  ntfs  defaults 0 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="某天突然开机进不了图形界面"><a href="#某天突然开机进不了图形界面" class="headerlink" title="某天突然开机进不了图形界面"></a>某天突然开机进不了图形界面</h2><p>不要随意更新！！特别是不要用sudo pacman -Su更新，尽量用图形界面里面的更新。<br>一般是显卡驱动损坏了。可以ctrl + alt + fn切换到命令行然后startx查看错误</p>
-<p>首先联网，可以先进windows联网，然后manjaro会保持连接的状态。然后重装nvidia驱动</p>
-<pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell">sudo mhwd -r pci video-nvidia
-sudo mhwd -a pci nonfree 0300
-reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>首先联网，可以先进windows联网，然后manjaro会保持连接的状态。然后重装显卡驱动<br>从linux515之后闭源驱动好像有问题，那装开源驱动。</p>
+<pre class="line-numbers language-Shell" data-language="Shell"><code class="language-Shell">sudo mhwd -li #查看驱动
+sudo mhwd -r &#96;驱动&#96;
+sudo mhwd -a pci free 0300
+reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -487,7 +473,7 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://jerrymousez.github.io/2021/04/18/manjaro/">http://jerrymousez.github.io/2021/04/18/manjaro/</a>
+                    <a href="http://jerrymousez.github.io/2022/04/21/manjaro/">http://jerrymousez.github.io/2022/04/21/manjaro/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -578,13 +564,13 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/04/22/%E7%BB%88%E7%AB%AF%E7%99%BB%E5%BD%95%E6%A0%A1%E5%9B%AD%E7%BD%91%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+                <a href="/2022/04/21/linux-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="终端登录校园网的小程序">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="linux 动态链接库">
                         
-                        <span class="card-title">终端登录校园网的小程序</span>
+                        <span class="card-title">linux 动态链接库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -595,15 +581,31 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-22
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-21
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            蒋璋
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/" class="post-category">
+                                    动态链接库
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93/">
+                        <span class="chip bg-color">动态链接库</span>
+                    </a>
+                    
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -615,13 +617,13 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/10/MMU-%E6%A8%A1%E6%8B%9F/">
+                <a href="/2022/03/28/ycm%E9%85%8D%E7%BD%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="MMU 模拟">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="ycm配置">
                         
-                        <span class="card-title">MMU 模拟</span>
+                        <span class="card-title">ycm配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -632,7 +634,7 @@ reboot<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-28
                             </span>
                         <span class="publish-author">
                             
