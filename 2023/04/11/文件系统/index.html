@@ -421,7 +421,7 @@
     __u16 s_state;         &#x2F;&#x2F; 文件系统状态
     __u32 s_zones;         &#x2F;&#x2F; 逻辑数据块个数(v2版)
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>文件系统的physical layout如下所示。<br><img src="/source/images/minix-layout.png" alt="MINIX文件系统的physical layout"><br>更具体的图解如下所示。<br><img src="/source/images/group-layout.webp" alt="group physical layout"></p>
+<p>文件系统的physical layout如下所示。<br><img src="/images/minix-layout.png" alt="MINIX文件系统的physical layout"><br>更具体的图解如下所示。<br><img src="/images/group-layout.webp" alt="group physical layout"></p>
 <h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>inode是文件系统中最重要的数据结构，它包含了文件的元数据，比如文件的大小，文件的权限，文件的创建时间，文件的数据块等等。MINIX文件系统的inode如下所示。</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">struct minix_inode &#123;
     __u16 i_mode;     &#x2F;&#x2F; 文件模式
@@ -433,7 +433,7 @@
     __u32 i_zone[9]; &#x2F;&#x2F; 文件数据存储的逻辑数据块编号
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>zone[0-6]描述的是直接索引，zone[7]描述的是一次间接索引，zone[8]描述的是二次间接索引。MINIX文件系统的数据块大小是1024字节，因此，zone[0-6]可以描述6个数据块，zone[7]可以描述1k&#x2F; 2 &#x3D; 512个数据块，zone[8]可以描述512 * 512个数据块。因此，MINIX文件系统的最大文件大小是(512 * 512 + 512 + 6) * 1024 &#x3D; 268965888字节，大概是256M。</p>
-<p><img src="/source/images/inode-index.jpg" alt="index node"><br>稍微解释一下，图中的是minix2的实现，相比于minix的区别就是多了一个三级索引块，增大了最大文件的容量。</p>
+<p><img src="/images/inode-index.jpg" alt="index node"><br>稍微解释一下，图中的是minix2的实现，相比于minix的区别就是多了一个三级索引块，增大了最大文件的容量。</p>
 <h3 id="目录项"><a href="#目录项" class="headerlink" title="目录项"></a>目录项</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">struct minix_dir_entry&#123;
   unsigned short inode;
   char name[30];
@@ -441,9 +441,9 @@
 <p>通常我们查到的资料里面会显示，dentry是文件系统保存在DRAM中，用来加速目录项查询的缓存。<br>但是，在没有缓存的时候也需要获取从文件名的映射，这个映射是保存在磁盘上的目录项，也可以称其为dentry。我们这里先讨论磁盘上的dentry，在后面的缓存一节中再去讨论DRAM中的dentry。</p>
 <p>一个目录项的大小是32字节，其中，inode字段是文件的inode号，name字段是文件名。那么1k的数据块中，能存放32个dentry。<br>dentry保存了从文件名到inode number的对应关系用于目录项的查询。</p>
 <p>在文件系统中，目录也是文件，只是目录文件的内容是目录项。目录项的inode号指向的是文件的inode，而文件的inode中的zone[0]指向的是文件的数据块。因此，我们可以通过目录项的inode号，找到文件的inode，然后通过文件的inode中的zone[0]，找到文件的数据块，从而读取文件的内容。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p><img src="/source/images/hardlink.webp" alt="hardlink"><br><img src="/source/images/softlink.webp" alt="softlink"><br>hard link的实现是通过在目录项中增加一个链接数字段，当创建一个hard link时，链接数加1，删除一个hard link时，链接数减1，当链接数为0时，才真正删除文件。hard link创建时只会增加一个目录项。<br>soft link的实现是在目录项中增加一个指向文件名的指针，当读取一个soft link时，先读取目录项，然后再根据指针读取文件内容。soft link创建时，需要一个目录项指向一个数据块，然后数据块中的内容。</p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p><img src="/images/hardlink.webp" alt="hardlink"><br><img src="/images/softlink.webp" alt="softlink"><br>hard link的实现是通过在目录项中增加一个链接数字段，当创建一个hard link时，链接数加1，删除一个hard link时，链接数减1，当链接数为0时，才真正删除文件。hard link创建时只会增加一个目录项。<br>soft link的实现是在目录项中增加一个指向文件名的指针，当读取一个soft link时，先读取目录项，然后再根据指针读取文件内容。soft link创建时，需要一个目录项指向一个数据块，然后数据块中的内容。</p>
 <h3 id="文件查找过程"><a href="#文件查找过程" class="headerlink" title="文件查找过程"></a>文件查找过程</h3><p>默认情况下，inode 1存放着根目录的inode，根目录的inode中的zone[0]存放着根目录的数据块。根目录的数据块中存放着根目录的目录项，目录项中存放着文件名和文件的inode号。因此，我们可以通过文件名，找到文件的inode号，然后通过inode号，找到文件的数据块，从而读取文件的内容。</p>
-<p>我们以获取文件<code>/a.txt</code>的内容为例，来说明文件查找的过程。<br><img src="/source/images/filemappings.png" alt="filemappings"><br>首先是根据根目录的的inode，得到目录文件的第一个数据block，在zone 1。然后在zone 1中找到文件名为a.txt的目录项，得到inode 2。然后根据inode 2，得到文件a.txt的第一个数据block，在zone 2。然后读取zone 2中的内容，就是文件a.txt的内容。</p>
+<p>我们以获取文件<code>/a.txt</code>的内容为例，来说明文件查找的过程。<br><img src="/images/filemappings.png" alt="filemappings"><br>首先是根据根目录的的inode，得到目录文件的第一个数据block，在zone 1。然后在zone 1中找到文件名为a.txt的目录项，得到inode 2。然后根据inode 2，得到文件a.txt的第一个数据block，在zone 2。然后读取zone 2中的内容，就是文件a.txt的内容。</p>
 <h2 id="文件系统优化"><a href="#文件系统优化" class="headerlink" title="文件系统优化"></a>文件系统优化</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>文件系统的数据有两种形式：一种是在DRAM中的缓存，另一种是在磁盘上的数据。文件系统的缓存主要是为了加速文件的读写，减少磁盘的读写次数。文件系统的缓存分为两种：元数据缓存和数据缓存。</p>
 <p>在如今的大多数磁盘文件系统中，都定义了inode以及dentry的用于索引文件块以及目录的查找。VFS也定义了类似的结构用于缓存文件的元数据。这些结构都是用于加速文件系统的访问，减少磁盘的读写次数。这些结构的缓存都是在DRAM中的，因此，我们把这些结构的缓存称为元数据缓存。</p>
 <p>以打开文件<code>/a/b/c</code>为例</p>
