@@ -399,16 +399,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>文件系统是操作系统用来管理持久性数据的子系统。尽管现在有许多持久性的介质，包括SSD、NVMe、Flash、以及持久性内存(NVM)，但是由于在文件系统的设计以及发展的历史中，主要是围绕磁盘进行设计的，所以我们下面讨论的时候，用磁盘来代表持久性介质。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>文件系统是操作系统用来管理持久性数据的子系统。尽管现在有许多持久性的介质，包括SSD、NVMe、Flash、以及持久性内存(NVM)，但是由于在文件系统的设计以及发展的历史中，主要是围绕磁盘进行设计的，所以我们下面讨论的时候，用磁盘来代表持久性介质。</p>
 <p>如果用户每次保存数据，或者读取数据时，都需要直接和磁盘打交道，那么用户的操作就会变得非常复杂。因此，文件系统的作用就是为用户提供一个简单的接口，用户只需要通过文件系统提供的接口，就可以对磁盘上的数据进行操作。文件系统的接口包括文件的创建、删除、读取、写入等。同时，也避免了用户直接操作磁盘导致其它的文件被破坏的情况。</p>
-<h2 id="文件索引"><a href="#文件索引" class="headerlink" title="文件索引"></a>文件索引</h2><h3 id="文件系统简单抽象"><a href="#文件系统简单抽象" class="headerlink" title="文件系统简单抽象"></a>文件系统简单抽象</h3><p>我们可以抽象一下，把对于文件的需求分为两种，一种是创建一个新的文件，给它写入制定的内容；另外一种是读取一个文件的内容。</p>
+<h1 id="文件索引"><a href="#文件索引" class="headerlink" title="文件索引"></a>文件索引</h1><h2 id="文件系统简单抽象"><a href="#文件系统简单抽象" class="headerlink" title="文件系统简单抽象"></a>文件系统简单抽象</h2><p>我们可以抽象一下，把对于文件的需求分为两种，一种是创建一个新的文件，给它写入制定的内容；另外一种是读取一个文件的内容。</p>
 <p>那么，文件系统可以理解成是一个键值数据库，键是文件名，值是文件的内容。当我们需要创建一个新的文件时，我们就需要在文件系统中创建一个新的键值对，键是文件名，值是文件的内容。当我们需要读取一个文件时，我们就需要在文件系统中查找键为文件名的键值对，然后返回对应的值。看起来使用一个哈希表，就能很高效的解决了，故事到这里就结束了。</p>
 <p>但是，问题并没有这么简单。一切的一切都需要进行持久化，也就是放在磁盘上。如果我们把文件系统的键值对都放在内存中，那么当系统崩溃时，我们就会丢失所有的数据。因此，我们需要把文件系统的键值对持久化到磁盘上。但是，如果我们把所有的键值对都放在一个文件中，那么当我们需要读取一个文件时，我们就需要把整个文件都读取到内存中，然后再从内存中查找键为文件名的键值对，这样的效率是非常低的。</p>
-<h3 id="目录项分离"><a href="#目录项分离" class="headerlink" title="目录项分离"></a>目录项分离</h3><p>为了避免这个问题，可以做一个常见的优化，就是将索引和数据进行分离。索引和数据分离后，索引占用的空间大大减小，可以从磁盘读入到内存中，从而加快文件查找的速度，而数据则放在磁盘上。</p>
+<h2 id="目录项分离"><a href="#目录项分离" class="headerlink" title="目录项分离"></a>目录项分离</h2><p>为了避免这个问题，可以做一个常见的优化，就是将索引和数据进行分离。索引和数据分离后，索引占用的空间大大减小，可以从磁盘读入到内存中，从而加快文件查找的速度，而数据则放在磁盘上。</p>
 <p>也就是将原本的从文件名到文件内容的映射，变成从文件名到文件内容在磁盘上的位置的映射。这样，当我们需要读取一个文件时，我们只需要从磁盘上读取文件名到文件内容在磁盘上的位置的映射，然后再根据这个位置，从磁盘上读取文件内容即可。<br>即filename-&gt;fileoffset-&gt;filecontent</p>
 <p>从文件路径也就是文件名到磁盘位置的映射，我们称之为目录项(dentry)。目录项是文件系统中最基本的数据结构，它包含了文件名和文件内容在磁盘上的位置。目录项的大小是固定的，一般是64字节，这样的好处是，我们可以通过文件名的哈希值，直接定位到目录项在磁盘上的位置。这样，我们就可以通过哈希表的方式，将文件名和目录项的映射关系保存在内存中，从而加快文件查找的速度。</p>
-<h2 id="MINIX文件系统"><a href="#MINIX文件系统" class="headerlink" title="MINIX文件系统"></a>MINIX文件系统</h2><p>我们以MINIX文件系统为例，来讲解文件系统的实现。MINIX文件系统是EXT文件系统的前身，是一个简单的文件系统。</p>
-<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>首先是supper block，它是文件系统的元数据，包含了文件系统的基本信息，比如文件系统的大小，inode的个数，数据块的个数等等。MINIX文件系统的supper block如下所示。</p>
+<h1 id="MINIX文件系统"><a href="#MINIX文件系统" class="headerlink" title="MINIX文件系统"></a>MINIX文件系统</h1><p>我们以MINIX文件系统为例，来讲解文件系统的实现。MINIX文件系统是EXT文件系统的前身，是一个简单的文件系统。</p>
+<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>首先是supper block，它是文件系统的元数据，包含了文件系统的基本信息，比如文件系统的大小，inode的个数，数据块的个数等等。MINIX文件系统的supper block如下所示。</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">struct minix_super_block &#123;
     __u16 s_ninodes;       &#x2F;&#x2F; inode的个数
     __u16 s_nzones;        &#x2F;&#x2F; 逻辑数据块个数(v1版)
@@ -422,7 +422,7 @@
     __u32 s_zones;         &#x2F;&#x2F; 逻辑数据块个数(v2版)
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>文件系统的physical layout如下所示。<br><img src="/images/minix-layout.png" alt="MINIX文件系统的physical layout"><br>更具体的图解如下所示。<br><img src="/images/group-layout.webp" alt="group physical layout"></p>
-<h3 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h3><p>inode是文件系统中最重要的数据结构，它包含了文件的元数据，比如文件的大小，文件的权限，文件的创建时间，文件的数据块等等。MINIX文件系统的inode如下所示。</p>
+<h2 id="inode"><a href="#inode" class="headerlink" title="inode"></a>inode</h2><p>inode是文件系统中最重要的数据结构，它包含了文件的元数据，比如文件的大小，文件的权限，文件的创建时间，文件的数据块等等。MINIX文件系统的inode如下所示。</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">struct minix_inode &#123;
     __u16 i_mode;     &#x2F;&#x2F; 文件模式
     __u16 i_nlinks;   &#x2F;&#x2F; 链接数
@@ -434,17 +434,17 @@
 &#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>zone[0-6]描述的是直接索引，zone[7]描述的是一次间接索引，zone[8]描述的是二次间接索引。MINIX文件系统的数据块大小是1024字节，因此，zone[0-6]可以描述6个数据块，zone[7]可以描述1k&#x2F; 2 &#x3D; 512个数据块，zone[8]可以描述512 * 512个数据块。因此，MINIX文件系统的最大文件大小是(512 * 512 + 512 + 6) * 1024 &#x3D; 268965888字节，大概是256M。</p>
 <p><img src="/images/inode-index.jpg" alt="index node"><br>稍微解释一下，图中的是minix2的实现，相比于minix的区别就是多了一个三级索引块，增大了最大文件的容量。</p>
-<h3 id="目录项"><a href="#目录项" class="headerlink" title="目录项"></a>目录项</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">struct minix_dir_entry&#123;
+<h2 id="目录项"><a href="#目录项" class="headerlink" title="目录项"></a>目录项</h2><pre class="line-numbers language-c" data-language="c"><code class="language-c">struct minix_dir_entry&#123;
   unsigned short inode;
   char name[30];
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通常我们查到的资料里面会显示，dentry是文件系统保存在DRAM中，用来加速目录项查询的缓存。<br>但是，在没有缓存的时候也需要获取从文件名的映射，这个映射是保存在磁盘上的目录项，也可以称其为dentry。我们这里先讨论磁盘上的dentry，在后面的缓存一节中再去讨论DRAM中的dentry。</p>
 <p>一个目录项的大小是32字节，其中，inode字段是文件的inode号，name字段是文件名。那么1k的数据块中，能存放32个dentry。<br>dentry保存了从文件名到inode number的对应关系用于目录项的查询。</p>
 <p>在文件系统中，目录也是文件，只是目录文件的内容是目录项。目录项的inode号指向的是文件的inode，而文件的inode中的zone[0]指向的是文件的数据块。因此，我们可以通过目录项的inode号，找到文件的inode，然后通过文件的inode中的zone[0]，找到文件的数据块，从而读取文件的内容。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><p><img src="/images/hardlink.webp" alt="hardlink"><br><img src="/images/softlink.webp" alt="softlink"><br>hard link的实现是通过在目录项中增加一个链接数字段，当创建一个hard link时，链接数加1，删除一个hard link时，链接数减1，当链接数为0时，才真正删除文件。hard link创建时只会增加一个目录项。<br>soft link的实现是在目录项中增加一个指向文件名的指针，当读取一个soft link时，先读取目录项，然后再根据指针读取文件内容。soft link创建时，需要一个目录项指向一个数据块，然后数据块中的内容。</p>
-<h3 id="文件查找过程"><a href="#文件查找过程" class="headerlink" title="文件查找过程"></a>文件查找过程</h3><p>默认情况下，inode 1存放着根目录的inode，根目录的inode中的zone[0]存放着根目录的数据块。根目录的数据块中存放着根目录的目录项，目录项中存放着文件名和文件的inode号。因此，我们可以通过文件名，找到文件的inode号，然后通过inode号，找到文件的数据块，从而读取文件的内容。</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><img src="/images/hardlink.webp" alt="hardlink"><br><img src="/images/softlink.webp" alt="softlink"><br>hard link的实现是通过在目录项中增加一个链接数字段，当创建一个hard link时，链接数加1，删除一个hard link时，链接数减1，当链接数为0时，才真正删除文件。hard link创建时只会增加一个目录项。<br>soft link的实现是在目录项中增加一个指向文件名的指针，当读取一个soft link时，先读取目录项，然后再根据指针读取文件内容。soft link创建时，需要一个目录项指向一个数据块，然后数据块中的内容。</p>
+<h2 id="文件查找过程"><a href="#文件查找过程" class="headerlink" title="文件查找过程"></a>文件查找过程</h2><p>默认情况下，inode 1存放着根目录的inode，根目录的inode中的zone[0]存放着根目录的数据块。根目录的数据块中存放着根目录的目录项，目录项中存放着文件名和文件的inode号。因此，我们可以通过文件名，找到文件的inode号，然后通过inode号，找到文件的数据块，从而读取文件的内容。</p>
 <p>我们以获取文件<code>/a.txt</code>的内容为例，来说明文件查找的过程。<br><img src="/images/filemappings.png" alt="filemappings"><br>首先是根据根目录的的inode，得到目录文件的第一个数据block，在zone 1。然后在zone 1中找到文件名为a.txt的目录项，得到inode 2。然后根据inode 2，得到文件a.txt的第一个数据block，在zone 2。然后读取zone 2中的内容，就是文件a.txt的内容。</p>
-<h2 id="文件系统优化"><a href="#文件系统优化" class="headerlink" title="文件系统优化"></a>文件系统优化</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>文件系统的数据有两种形式：一种是在DRAM中的缓存，另一种是在磁盘上的数据。文件系统的缓存主要是为了加速文件的读写，减少磁盘的读写次数。文件系统的缓存分为两种：元数据缓存和数据缓存。</p>
+<h1 id="文件系统优化"><a href="#文件系统优化" class="headerlink" title="文件系统优化"></a>文件系统优化</h1><h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>文件系统的数据有两种形式：一种是在DRAM中的缓存，另一种是在磁盘上的数据。文件系统的缓存主要是为了加速文件的读写，减少磁盘的读写次数。文件系统的缓存分为两种：元数据缓存和数据缓存。</p>
 <p>在如今的大多数磁盘文件系统中，都定义了inode以及dentry的用于索引文件块以及目录的查找。VFS也定义了类似的结构用于缓存文件的元数据。这些结构都是用于加速文件系统的访问，减少磁盘的读写次数。这些结构的缓存都是在DRAM中的，因此，我们把这些结构的缓存称为元数据缓存。</p>
 <p>以打开文件<code>/a/b/c</code>为例</p>
 <ol>
@@ -453,6 +453,12 @@
 <li>根据找到的目录项，缓存对应dentry，以及inode，构建内存中的元数据缓存。</li>
 <li>返回到VFS中</li>
 </ol>
+<h2 id="journal"><a href="#journal" class="headerlink" title="journal"></a>journal</h2><p>ext2的文件系统的故障恢复往往需要很长时间，为了解决这个问题，ext3文件系统引入了journal，提高系统的可靠性和稳定性。</p>
+<p>Ext3中的Journal在磁盘上写入文件数据，而不是将数据直接写入磁盘的数据区域，而是将数据写入磁盘上的指定区域。一旦数据安全地放在硬盘驱动器上，就可以将其合并或附加到目标文件中，而不会丢失数据。这样，即使在系统崩溃或断电的情况下，也可以将数据恢复到原始文件中。</p>
+<p>在下一个启动时，将检查文件系统是否有矛盾，然后将其保留在日记帐中的数据将投入到磁盘的数据区域，以完成目标文件的更新。</p>
+<h2 id="Extents"><a href="#Extents" class="headerlink" title="Extents"></a>Extents</h2><p>指针可以映射块范围，而不是像以前一样一个指针只能映射一个块，减少了大文件指针的数量。</p>
+<h2 id="多块分配"><a href="#多块分配" class="headerlink" title="多块分配"></a>多块分配</h2><p>可以一次分配多个块</p>
+<h2 id="延迟分配"><a href="#延迟分配" class="headerlink" title="延迟分配"></a>延迟分配</h2><p>EXT4延迟块分配，直到将数据冲洗到磁盘。相比之下，即使数据进入写入缓存，某些文件系统也会立即分配块。延迟分配可通过一次有效分配大量数据来改善性能并减少碎片。</p>
 
                 
             </div>
@@ -566,18 +572,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2023/04/11/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                <a href="/2023/05/11/nvim%E9%85%8D%E7%BD%AE/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="文件系统">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="nvim配置">
                         
-                        <span class="card-title">文件系统</span>
+                        <span class="card-title">nvim配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -587,31 +592,26 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-11
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    文件系统
+                            <a href="/categories/vim/" class="post-category">
+                                    vim
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">文件系统</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">
-                        <span class="chip bg-color">元数据分析</span>
+                    <a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">
+                        <span class="chip bg-color">编辑器</span>
                     </a>
                     
                 </div>

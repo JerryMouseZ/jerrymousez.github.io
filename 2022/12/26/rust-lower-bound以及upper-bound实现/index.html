@@ -406,29 +406,7 @@
   &#125;
   res
 &#125;;
-
-let upper_bound &#x3D; |nums: Vec&lt;i32&gt;, target: i32| &#123; 
-  let (mut left, mut right) &#x3D; (0, nums.len() - 1);
-  let mut res &#x3D; left;
-  if nums.len() &#x3D;&#x3D; 0 || nums[res] &gt; target &#123;
-      return usize::MAX;
-  &#125;
-  while left &lt;&#x3D; right &#123;
-      let mid &#x3D; (left + right) &#x2F; 2;
-      if nums[mid] &#x3D;&#x3D; target &#123;
-          res &#x3D; usize::max(res, mid);
-      &#125;
-      if nums[mid] &gt; target &#123;
-          right &#x3D; mid - 1;
-          if mid &#x3D;&#x3D; 0 &#123;
-              break;
-          &#125;
-      &#125; else &#123;
-          left &#x3D; mid + 1;
-      &#125;
-  &#125;
-  res
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -537,13 +515,13 @@ let upper_bound &#x3D; |nums: Vec&lt;i32&gt;, target: i32| &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2023/04/10/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E8%8E%B7%E5%8F%96%E5%8F%AF%E5%86%99%E7%9A%84%E9%95%BF%E5%BA%A6/">
+                <a href="/2023/01/03/2022%E5%B0%8F%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="字符设备获取可写的长度">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="2022小结">
                         
-                        <span class="card-title">字符设备获取可写的长度</span>
+                        <span class="card-title">2022小结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -554,7 +532,7 @@ let upper_bound &#x3D; |nums: Vec&lt;i32&gt;, target: i32| &#123;
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-03
                         </span>
                         <span class="publish-author">
                             
