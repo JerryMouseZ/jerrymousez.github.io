@@ -1,0 +1,75 @@
+name: Horizon Daily Report
+
+on:
+  schedule:
+    # 00:00 UTC = 08:00 Asia/Shanghai
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: horizon-daily
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out personal site
+        uses: actions/checkout@v6
+
+      - name: Check out Horizon
+        uses: actions/checkout@v6
+        with:
+          repository: Thysrael/Horizon
+          path: _horizon
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.26"
+
+      - name: Validate required secrets
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HORIZON_WEBHOOK_URL: ${{ secrets.HORIZON_WEBHOOK_URL }}
+        run: |
+          test -n "$DEEPSEEK_API_KEY" || { echo "Missing DEEPSEEK_API_KEY"; exit 1; }
+          test -n "$HORIZON_WEBHOOK_URL" || { echo "Missing HORIZON_WEBHOOK_URL"; exit 1; }
+
+      - name: Generate report and notify Feishu
+        working-directory: _horizon
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          HORIZON_WEBHOOK_URL: ${{ secrets.HORIZON_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          cp data/config.github.json data/config.json
+          jq '.ai.model = "deepseek-chat" | .ai.languages = ["zh"]' \
+            data/config.json > data/config.json.tmp
+          mv data/config.json.tmp data/config.json
+          uv sync
+          uv run horizon --hours 24
+
+      - name: Build static report page
+        run: _horizon/.venv/bin/python scripts/build-horizon-page.py _horizon/data/summaries
+
+      - name: Commit and publish
+        run: |
+          if git diff --quiet -- horizon; then
+            echo "No report changes to publish."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add horizon
+          git commit -m "Publish Horizon daily report $(date -u +%F)"
+          git pull --rebase origin master
+          git push origin HEAD:master
