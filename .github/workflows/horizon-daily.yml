@@ -5,6 +5,11 @@ on:
     # 00:00 UTC = 08:00 Asia/Shanghai
     - cron: "0 0 * * *"
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/horizon-run-now
 
 permissions:
   contents: write
