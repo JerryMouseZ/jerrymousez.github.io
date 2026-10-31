@@ -1,0 +1,242 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horizon 每日速递 - 2026-10-31</title><style>:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.72;background:#f5f7fb;color:#172033}main{max-width:920px;margin:32px auto;padding:38px 48px;background:#fff;border-radius:16px;box-shadow:0 8px 30px #1f29371a}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}h1,h2,h3{line-height:1.35;color:#0f172a}h1{border-bottom:1px solid #e5e7eb;padding-bottom:18px}h2{margin-top:42px}h3{margin-top:30px}blockquote{margin:20px 0;padding:12px 18px;border-left:4px solid #3b82f6;background:#eff6ff;color:#334155}code{padding:2px 6px;border-radius:5px;background:#eef2f7}hr{border:0;border-top:1px solid #e5e7eb;margin:36px 0}details{margin:14px 0;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px}nav{max-width:920px;margin:24px auto 0;padding:0 8px}nav a{font-weight:600}@media(max-width:720px){main{margin:12px;padding:24px 18px;border-radius:0}}@media(prefers-color-scheme:dark){body{background:#0b1120;color:#dbe4f0}main{background:#111827}h1,h2,h3{color:#f8fafc}blockquote{background:#172554;color:#dbeafe}code{background:#263244}details,h1,hr{border-color:#334155}}</style></head><body><nav><a href="/">← 返回 JerryMouseZ 首页</a></nav><main><h1>Horizon 每日速递 - 2026-10-31</h1>
+<blockquote>
+<p>从 37 条内容中筛选出 15 条重要资讯。</p>
+</blockquote>
+<hr />
+<p><strong>科技新闻</strong></p>
+<ol>
+<li><a href="#item-tech-news-1">Azure 被曝五起完整跨租户入侵</a> ⭐️ 8.0/10</li>
+<li><a href="#item-tech-news-2">Cursor 市场现被篡改 Claude Code 扩展，植入 SSH 后门</a> ⭐️ 8.0/10</li>
+<li><a href="#item-tech-news-3">AI 不是取代 SRE，而是在让 SRE 技能退化</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-4">Northflank 据报遭安全入侵，社区聚焦多租户 SaaS 风险</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-5">Show HN：用约 1GB Qwen 权重实现可运行的 NES 模拟器</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-6">把经典 Mac OS 移植到任天堂 Wii 的项目</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-7">Tangled 重新发布基于 AT Protocol 的联邦代码托管平台</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-8">Soft-MTP：一行代码改进多 Token 预测</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-9">小米开源 0.8B 参数文档理解模型 Xiaomi-OCR-0</a> ⭐️ 7.0/10</li>
+</ol>
+<p><strong>财经新闻</strong></p>
+<ol>
+<li><a href="#item-finance-news-1">DeepSeek 二轮融资 1055 亿元，估值超 6155 亿元</a> ⭐️ 8.0/10</li>
+<li><a href="#item-finance-news-2">SpaceX 上季度约三分之一营收来自单一 AI 客户，据称为 Anthropic</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-3">证监会党委会议：全力稳市场稳预期，深化投融资改革</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-4">四家日系车企在华产量降至峰值四成以下</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-5">法国国民议会通过数据流量税修正案</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-6">OpenAI 据称将融资目标下调 100 亿美元</a> ⭐️ 7.0/10</li>
+</ol>
+<hr />
+<h2>科技新闻</h2>
+<p><a id="item-tech-news-1"></a></p>
+<h3><a href="https://www.binarysecurity.no/posts/2026/10/one-root-case">Azure 被曝五起完整跨租户入侵</a> ⭐️ 8.0/10</h3>
+<p>Binary Security 发布的一篇安全研究文章称，Azure 存在五起完整的跨租户入侵案例，涉及路径遍历和 IDOR（不安全的直接对象引用）等漏洞类型。该文于 2026 年 10 月 30 日发布在 Hacker News，引发大量关于租户隔离与身份验证缺陷的讨论。目前可获取的信息仅有标题、评论与互动数据，尚无完整技术细节，因此这些漏洞的具体影响范围、受影响服务及修复状态均未得到独立确认。</p>
+<p>hackernews · swq115 · 10月30日 10:06 · <a href="https://news.ycombinator.com/item?id=50301854">社区讨论</a></p>
+<p><strong>「背景」</strong> 该报告是 Binary Security 关于 Azure Logic Apps 中 API Connections 跨租户缺陷系列文章的延续。2025 年 8 月的第二部分曾说明，所有 API Connections 都创建在同一个共享 APIM 实例上，这一架构细节使任意已部署的 API Connection 都可能被跨租户攻破；本次报告则称又发现五个同类漏洞，各自都能导致完整的跨租户入侵。</p>
+<p><strong>「影响与关注点」</strong> 若文章所述成立，跨租户隔离失效意味着攻击者可能触及其他客户租户内的资源，这对依赖 Azure 多租户架构的企业构成直接风险。评论中提到的 adminconsent 回调可伪造问题，指向身份验证流程中需要重点核查的环节；在官方或独立验证出现前，相关租户管理员应关注微软的后续公告与修复指引。</p>
+<p><strong>「社区讨论」</strong> 有评论者呼吁微软处理 login.microsoftonline.com 的 adminconsent 流程，称在攻击者知晓其他客户租户 ID 时回调可被伪造，并认为文档中“不要用 tenant 参数值做身份验证或授权”的警告并不足以解决问题。另有评论认为 Azure 的跨租户泄露数量似多于竞争对手，也有人推测“为资源名添加随机性”的建议与路径遍历和 IDOR 漏洞有关。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.binarysecurity.no/posts/2026/10/one-root-case">Azure&#x27;s Weakest Link - Five Full Cross-Tenant Compromises</a></li>
+<li><a href="https://binarysecurity.no/posts/2025/08/azures-weakest-link-part2">Azure&#x27;s Weakest Link - Full Cross-Tenant Compromise</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#cloud-security</code>, <code>#azure</code>, <code>#vulnerability-research</code>, <code>#multi-tenancy</code>, <code>#authentication</code></p>
+<hr />
+<p><a id="item-tech-news-2"></a></p>
+<h3><a href="https://phorion.io/blog/offical-claude-code-vsx-compromise/">Cursor 市场现被篡改 Claude Code 扩展，植入 SSH 后门</a> ⭐️ 8.0/10</h3>
+<p>Cursor 安全公告称，10 月 29 日其扩展市场（基于 Open VSX）上出现了被篡改的 Anthropic.claude-code 2.1.313 版本，该版本并非 Anthropic 开发，最多约 5000 名用户受影响。恶意扩展会收集主机信息，并试图向用户的 SSH authorized_keys 追加攻击者公钥（标记为 svc-telemetry）以建立长期后门；由于需要管理员权限，多数主机建隧道失败。Cursor 已下架该版本、暂时关闭整个市场，轮换密钥后重新上线，攻击者服务器也已下线。Anthropic 员工在评论中强调，这并非 Anthropic 系统或员工电脑被攻破，官方渠道发布的版本不受影响，仅波及 Cursor 用户。</p>
+<p>hackernews · _chall · 10月30日 07:09 · <a href="https://news.ycombinator.com/item?id=50300683">社区讨论</a></p>
+<p><strong>「背景」</strong> Cursor 的安全公告称，被篡改的 Anthropic.claude-code 2.1.313 版本于 10 月 29 日出现在其扩展市场，该版本并非 Anthropic 开发，最多影响 5000 名用户。据 The Hacker News 报道，恶意版本已被移除，Anthropic 随后向 Open VSX 和微软 VS Code 市场发布了 2.1.314 版本。Anthropic 员工在讨论中强调，官方渠道发布的版本未受影响，此次事件仅涉及 Cursor 用户。</p>
+<p><strong>「影响与自查」</strong> 受影响的是通过 Cursor 市场安装该扩展的开发者。Cursor 博客给出了自查方法：在 macOS 上运行 grep -qs svc-telemetry ~/.ssh/authorized_keys，若输出“svc-telemetry key found”则说明机器被植入该公钥，需立即移除并排查。评论者指出，目前公开的报道均指向 Cursor 市场和 Open VSX，未明确提及微软官方扩展市场是否受影响。</p>
+<p><strong>「社区讨论」</strong> 有评论者引用路透社报道称，该恶意扩展在太平洋时间周四约 2:27 至 13:35 期间上线，并追问这究竟是否出自 Anthropic 以及事件如何发生；Anthropic 的 Felix 回应称，是攻击者利用对 Cursor 市场的访问权限发布了仿冒版本。另有评论者提醒，应区分 Open VSX/Cursor 市场与微软官方市场，并指出原始 Phorion 报告详细描述了向 authorized_keys 添加 SSH 公钥的过程。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://thehackernews.com/2026/10/official-claude-code-vs-code-extension.html">Official Claude Code VS Code Extension Compromised to Install...</a></li>
+<li><a href="https://cursor.com/blog/claude-code-extension-security-notice">Security notice — malicious version of Anthropic. claude - code ...</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#security</code>, <code>#supply-chain</code>, <code>#VS Code extensions</code>, <code>#AI coding tools</code>, <code>#open source</code></p>
+<hr />
+<p><a id="item-tech-news-3"></a></p>
+<h3><a href="https://newsletter.signoz.io/p/ai-isnt-replacing-sres-its-deskilling">AI 不是取代 SRE，而是在让 SRE 技能退化</a> ⭐️ 7.0/10</h3>
+<p>Signoz 通讯的一篇评论文章认为，AI 在站点可靠性工程（SRE）中的主要影响不是取代 SRE，而是让工程师逐渐失去亲手排查和操作的能力。文章借用航空业的做法作为参照：美国联邦航空管理局（FAA）要求飞行员即使自动驾驶可用也必须保留手动飞行时间，作者据此建议 SRE 团队可以把部分事故——即便 AI 能处理——指定为人工练习机会。该文在 Hacker News 获得 532 分和约 400 条评论，但属于观点分析而非实测结论。</p>
+<p>hackernews · dorianniemiec · 10月30日 15:52 · <a href="https://news.ycombinator.com/item?id=50305693">社区讨论</a></p>
+<p><strong>「背景」</strong> 该文以航空业为参照：飞行员即使在自动化系统可用时也需保持手动飞行能力，美国联邦航空管理局（FAA）建议飞行员维持手动飞行技能，以便在必要时脱离自动化操作飞机。相关讨论还提到法航 447 航班事故——自动驾驶在高空因空速数据不可靠而断开后，机组未能识别失速并改出。作者据此类比，主张 SRE 团队可保留部分本可由 AI 处理的事故作为人工演练机会。</p>
+<p><strong>「对团队的影响」</strong> 若采纳文中建议，SRE 团队需要在自动化流程中主动保留人工处置环节，这会增加短期人力投入，并可能拖慢部分事故的响应速度，以换取工程师技能的维持。</p>
+<p><strong>「社区讨论」</strong> 有评论者赞同航空业类比，认为该行业在复杂度和自动化上升的同时积累了大量防人为失误的经验。也有人认为技能退化已持续数百年、不必特别担忧 AI，并指出更值得警惕的是职业中的即时反馈成瘾。一位创业公司从业者则表示，AI 代理在 AWS 等操作上已明显快于自己，愿意授予其只读权限来排查问题；另有评论强调 SRE 的核心是理解系统，而 AI 生成的系统缺乏这种理解。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.linkedin.com/pulse/automation-dependency-when-pilots-monitor-instead-fly-meshal-5ev3e">Automation Dependency : When Pilots Monitor Instead of Fly</a></li>
+<li><a href="https://www.academia.edu/176389792/Is_Flying_a_Plane_Mostly_Automated_or_Do_Pilots_Manually_Fly_It">Is Flying a Plane Mostly Automated or Do Pilots Manually Fly It</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#SRE</code>, <code>#AI automation</code>, <code>#deskilling</code>, <code>#software engineering culture</code>, <code>#observability</code></p>
+<hr />
+<p><a id="item-tech-news-4"></a></p>
+<h3><a href="https://status.northflank.com/">Northflank 据报遭安全入侵，社区聚焦多租户 SaaS 风险</a> ⭐️ 7.0/10</h3>
+<p>据 Hacker News 讨论，多租户 PaaS 厂商 Northflank 据报遭遇安全入侵，相关状态页面被提交至该站。目前可获取的信息仅为状态页链接和社区讨论，入侵的具体范围、受影响数据及厂商官方说明均未在现有材料中得到证实。讨论中有人称 Northflank 似乎未向客户提供代码或二进制文件访问权限，但这一说法同样缺乏证据支持。</p>
+<p>hackernews · js4ever · 10月30日 15:10 · <a href="https://news.ycombinator.com/item?id=50305025">社区讨论</a></p>
+<p><strong>「背景」</strong> Northflank 是一家提供全栈 PaaS 的平台，允许团队部署容器、托管数据库、GPU 推理负载和 AI 沙箱，既可运行在 Northflank 托管的云上，也可运行在客户自有的 AWS、GCP 和 Azure 账户中。此次事件的相关信息目前主要来自其状态页面，具体泄露范围和细节在现有材料中尚不充分。</p>
+<p><strong>「对用户的影响」</strong> 据第三方报道，Northflank 于 2026 年 10 月 30 日告知所有用户，应假定其环境变量已被解密，并立即轮换全部密钥与凭据。依赖该平台托管环境变量的团队应优先更换生产数据库、云厂商和第三方 API 的访问密钥，并检查日志中是否存在异常调用。</p>
+<p><strong>「社区讨论」</strong> 有评论者列举 PingCAP/TiDB、Fireworks AI、Zeabur、OpenCode Console、Railway 等厂商，称自 9 月以来已发生至少六起针对多租户即服务厂商的快速攻击，并认为这是一场正在展开的信息安全紧急事件；该清单为评论者个人统计，未经独立核实。另有开发者表示会加密环境变量并把解密密钥硬编码进代码，以便在服务商被攻破时仍能保护配置；也有人认为此类事件会促使企业客户回流超大规模云厂商，因为易用性无法替代安全性。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://northflank.com/blog/what-is-paas-hosting">What is PaaS hosting? Benefits and how it works | Blog — Northflank</a></li>
+<li><a href="https://vantaige.io/ai-tool/northflank">Northflank : Full-Stack PaaS with GPU and BYOC | Vantaige</a></li>
+<li><a href="https://makerstack.co/reviews/northflank-review/">Northflank Review 2026: 7.6/10, from $10/mo</a></li>
+<li><a href="https://www.qovery.com/blog/northflank-security-incident-secrets-own-cloud">Northflank Security Incident (October 30, 2026): What ...</a></li>
+<li><a href="https://elsolitario.org/en/2026/10/30/northflank-security-breach-rotate-keys/">Northflank Breach: What Happened and How to Rotate Keys</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#security</code>, <code>#cloud-infrastructure</code>, <code>#SaaS</code>, <code>#multi-tenancy</code>, <code>#incident-response</code></p>
+<hr />
+<p><a id="item-tech-news-5"></a></p>
+<h3><a href="https://github.com/dbreunig/nesformer">Show HN：用约 1GB Qwen 权重实现可运行的 NES 模拟器</a> ⭐️ 7.0/10</h3>
+<p>Drew Breunig 发布了 nesformer 项目，将任天堂娱乐系统（NES）的 6502 CPU 和 RAM 模拟逻辑编码进 Qwen3.5-4B 的约 1GB 权重中，并提供一个 CLI，可指向 NES ROM 运行，例如《超级马里奥兄弟》。据社区评论，该项目不仅模拟 CPU，还把 RAM 状态放在模型内部（借助 gated deltanet 架构）。作者称其运行速度比真实主机慢 150–290 倍，因此这是可运行的技术演示，而非实用模拟器。项目受 Divyansh Agrawal 的 qwenputer 启发，作者表示 Opus 5.5 仅用两条提示就生成了可用的权重和代码，并使用了 Christopher Pow 约 15 年前发布的 NES CPU 一致性测试集。</p>
+<p>hackernews · dbreunig · 10月30日 16:40 · <a href="https://news.ycombinator.com/item?id=50306442">社区讨论</a></p>
+<p><strong>「背景」</strong> 该项目直接受 Divyansh Agrawal 的 qwenputer 启发：qwenputer 把一颗可运行的 32 位 RISC-V CPU 和内存编译进 Qwen 3.5-4B 的权重中，其关键在于 Qwen 3-Next 与 Qwen 3.5 的注意力层大量采用 Gated DeltaNet 这一线性 RNN 结构，每个头维护并更新一个状态矩阵。nesformer 沿用同一思路，把 NES 的 6502 CPU 与 RAM 也编码进约 1GB 的 Qwen 权重，并用 Christopher Pow 约 15 年前发布的 NES CPU 一致性测试集来验证实现。</p>
+<p><strong>「实际影响」</strong> 对想复现或扩展这一思路的开发者而言，关键限制是速度：150–290 倍的减速意味着它无法替代常规软件模拟器，只能作为研究“把解释器或虚拟机嵌入模型权重”的试验平台。作者提供的两条提示词和一致性测试集为复现提供了具体起点，但项目本身仍是概念验证。</p>
+<p><strong>「社区讨论」</strong> 有评论者（armcat）认为，原则上可以把小型虚拟机编译进 LLM 权重，让 Python 解释器、shell 及 sed、grep 等工具通过矩阵乘法在模型内部执行，而不必依赖缓慢的自回归 token 输出和外部工具调用。另一些评论（jacquesm、pbohun）则强调，这类项目恰好凸显了确定性程序与 LLM 之间巨大的计算效率差距：技术上可行，但代价是数千倍的算力与时间。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://divagr.com/blog/qwenputer">Qwenputer : a fully functioning, deterministic RISC-V CPU inside...</a></li>
+<li><a href="https://github.com/divagr18/qwenputer">GitHub - divagr18/ qwenputer : A computer, compiled into the weights...</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#LLM</code>, <code>#emulation</code>, <code>#Qwen</code>, <code>#model weights</code>, <code>#Hacker News</code></p>
+<hr />
+<p><a id="item-tech-news-6"></a></p>
+<h3><a href="https://virtuallyfun.com/2026/10/29/my-favourite-powermac-is-a-nintendo-wii/">把经典 Mac OS 移植到任天堂 Wii 的项目</a> ⭐️ 7.0/10</h3>
+<p>virtuallyfun.com 发布了一篇详细的项目记录，介绍如何将经典 Mac OS 移植到任天堂 Wii 硬件上运行。文章侧重于具体实现细节，而非发布成品或公布性能数据。该文在 Hacker News 上引发关注，讨论集中在复古计算与系统破解的技术趣味上。</p>
+<p>hackernews · DHowett · 10月30日 17:25 · <a href="https://news.ycombinator.com/item?id=50307190">社区讨论</a></p>
+<p><strong>「背景」</strong> Wii 与 GameCube 均采用 PowerPC 架构，其芯片组由 ArtX 设计，这使它们与经典 Mac 的 PowerPC 硬件存在架构上的相似性。此前已有将 Linux、NetBSD 和 Windows NT 移植到 Wii 的先例，2023 年 Hackaday 报道过借助 Mac-on-Linux 在 Wii 上运行 PowerPC Mac OS 的方案，而 2026 年 4 月还有开发者将 Mac OS X 10.0 Cheetah 原生移植到 Wii。本次项目由 Rairii 完成，据 Virtually Fun 的帖子，Mac OS 7.6 与 Mac OS 9.2.2 已在 Wii 上启动。</p>
+<p><strong>「社区讨论」</strong> 有评论者指出，该项目作者 Wack0 此前还做过面向 Macintosh 的 NT 移植以及 GameCube/Wii 上的 entii-for-workcubes 项目。另有评论者希望这个 Mac OS 移植能进入 Wii 自制软件商店 Open Shop Channel，并提到 WiiLink 恢复了 Wii 的在线游戏功能。也有评论者追问能否反向操作，把 PowerMac 变成任天堂 Wii。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://virtuallyfun.com/2026/10/29/my-favourite-powermac-is-a-nintendo-wii/">My favourite PowerMac is a Nintendo Wii | Virtually Fun</a></li>
+<li><a href="https://emulation.gametechwiki.com/index.php/Classic_Mac_OS_emulators">Classic Mac OS emulators - Emulation General Wiki How To Install Mac OS On The Nintendo Wii - Hackaday Fun: Get Mac OS X 10.0 Running on Nintendo Wii - OS X Daily Classic Mac on Nintendo Wii - E-Maculation Porting Mac OS X to the Nintendo Wii | Bryan Keller’s Dev Blog GitHub - bryankeller/wiiMac: A Mac OS X bootloader for the ...</a></li>
+<li><a href="https://hackaday.com/2023/05/03/how-to-install-mac-os-on-the-nintendo-wii/">How To Install Mac OS On The Nintendo Wii - Hackaday</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#retro-computing</code>, <code>#emulation</code>, <code>#classic-mac-os</code>, <code>#nintendo-wii</code>, <code>#systems-hacking</code></p>
+<hr />
+<p><a id="item-tech-news-7"></a></p>
+<h3><a href="https://tangled.org/blog/forge/">Tangled 重新发布基于 AT Protocol 的联邦代码托管平台</a> ⭐️ 7.0/10</h3>
+<p>Tangled 宣布重新发布其基于 AT Protocol 的联邦代码托管平台，联合创始人 icy 在评论中表示，此次发布稳定了 AT Protocol 的 lexicon，全面重构了架构与界面，并让整套系统（或其中部分组件）的自托管变得“极其简单”。平台还新增了组织支持，私有仓库将在随后几周内推出。这些是厂商在发布时的说法，尚无独立验证的可用性或互操作结果。</p>
+<p>hackernews · zlliang · 10月30日 15:44 · <a href="https://news.ycombinator.com/item?id=50305573">社区讨论</a></p>
+<p><strong>「背景」</strong> Tangled 是一个基于 AT Protocol 构建的联邦式代码托管平台，其设计目标是让自托管实例能够原生地发现、交互并参与其他实例上的仓库，从而形成类似 GitHub 的协作网络但不受单一平台控制。据外部报道，这家芬兰初创公司此前已融资 380 万欧元用于开发这一联邦式 GitHub 替代方案。本次公告在此基础上宣布了协议词表稳定化、架构与界面重做、自托管简化以及组织支持等更新。</p>
+<p><strong>「影响与待确认事项」</strong> 对希望摆脱单一托管平台的开源项目而言，Tangled 提供了自托管代码与发布的新选项，但私有仓库尚未上线，实际迁移仍需等待。另一位代码托管平台 juju.bi 的开发者 pksunkara 询问 lexicon 是否已将 issue、PR 和评论记录从用户作用域移到仓库作用域，并计划让 juju.bi 的公开仓库与 Tangled 互操作、充当 knot 服务器；该问题在现有材料中未获答复，互操作能力仍待确认。</p>
+<p><strong>「社区讨论」</strong> 有用户 stryan 表示希望把自托管 Gitea 上的代码和发布迁到 Tangled，同时保留 GitHub 用于可发现性和备份，但需要 git-bug 提供 Tangled 桥接以同步 issue。bluerooibos 则反馈首页时间线信息过于密集，建议简化个人页的活动图表，改用 GitHub/GitLab 式的方格图。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://nordictech.news/p/tangled-eur-3-8m-federated-github-alternative">Tangled Raises EUR 3 . 8 M to Build a Federated GitHub Rival</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#federated code forge</code>, <code>#AT Protocol</code>, <code>#open source collaboration</code>, <code>#self-hosting</code>, <code>#git</code></p>
+<hr />
+<p><a id="item-tech-news-8"></a></p>
+<h3><a href="https://www.reddit.com/r/MachineLearning/comments/1xjnz40/multitoken_prediction_done_right_r/">Soft-MTP：一行代码改进多 Token 预测</a> ⭐️ 7.0/10</h3>
+<p>作者在 Reddit 分享论文，提出 Soft-MTP：将标准多 Token 预测（MTP）的梯度分解为 KL 自蒸馏信号与有害的噪声残差，并通过一行 detach 代码改动（h_ntp += h_mtp.detach() - h_mtp）提取该 KL 梯度。作者称这一改动在多项任务上改进了 MTP，并提供了代码、论文（arXiv 2610.38331）和 HuggingFace 模型集合链接。上述效果均为作者自述，尚未经独立验证。</p>
+<p>reddit · r/MachineLearning · /u/jayden_teoh_ · 10月30日 18:53</p>
+<p><strong>「背景」</strong> 多令牌预测（MTP）在标准实现中会为每个位置额外预测后续多个令牌，其梯度同时包含对下一令牌预测有用的信号与噪声。该论文将标准 MTP 梯度分解为 KL 自蒸馏信号与噪声残差两部分，并据此提出 Soft-MTP：通过一行 detach 改动复用已有的 NTP 与 MTP 交叉熵计算，只回传 KL 自蒸馏信号。相关论文页面也确认了这一机制描述。</p>
+<p><strong>「潜在影响」</strong> 若该结论成立，正在使用 MTP 进行预训练或投机解码的团队可能只需一行代码即可获得改进，且无需额外训练成本；但在采用前应自行复现，因为当前证据仅来自作者自报结果。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://huggingface.co/papers/2610.38331">Paper page - Multi - Token Prediction Done Right</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#multi-token-prediction</code>, <code>#LLM pre-training</code>, <code>#speculative decoding</code>, <code>#self-distillation</code>, <code>#research paper</code></p>
+<hr />
+<p><a id="item-tech-news-9"></a></p>
+<h3><a href="https://x.com/XiaomiTech_/status/2116154468358316380">小米开源 0.8B 参数文档理解模型 Xiaomi-OCR-0</a> ⭐️ 7.0/10</h3>
+<p>小米开源了文档理解模型 Xiaomi-OCR-0，参数量为 0.8B，支持文档解析、关键信息提取和文字识别视觉问答。小米称该模型在 OmniDocBench v1.6 测试中，文档解析性能在 10 亿参数以下模型中排名第一。模型权重、推理代码及演示均已开源。上述排名为小米自行公布的说法，尚未见到独立评测验证。</p>
+<p>telegram · zaihuapd · 10月30日 16:00</p>
+<p><strong>「背景」</strong> Xiaomi-OCR-0 是一个统一的 0.8B 视觉语言模型，同时面向文档解析和以 OCR 为中心的理解任务，其基座为 Qwen3.5-0.8B。据技术报告，该模型在 OmniDocBench v1.6 上得分为 96.83，在 Real5-OmniDocBench 上为 95.24，在 Wild-OmniDocBench 上为 87.94。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li>xiaomi-research/Xiaomi-OCR-0 - Hugging Face</li>
+<li>Xiaomi-OCR-0 Technical Report - arXiv</li>
+<li>Xiaomi-OCR-0 - SeerRay-Lab - GitHub</li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#open-source</code>, <code>#document-understanding</code>, <code>#OCR</code>, <code>#small-models</code>, <code>#Xiaomi</code></p>
+<hr />
+<h2>财经新闻</h2>
+<p><a id="item-finance-news-1"></a></p>
+<h3><a href="https://www.theinformation.com/articles/behind-deepseeks-16-billion-funding-chinese-tech-titans-state-players">DeepSeek 二轮融资 1055 亿元，估值超 6155 亿元</a> ⭐️ 8.0/10</h3>
+<p>据 The Information 报道，DeepSeek 第二轮融资规模达 1055 亿元人民币，估值突破 6155 亿元人民币，近 30 家投资方参与；本轮国资背景投资者贡献约 27% 的资金，高于今年 6 月首轮约 510 亿元融资时的 2%。</p>
+<p>telegram · zaihuapd · 10月30日 12:37</p>
+<p><strong>「背景」</strong> DeepSeek 今年 6 月完成首轮外部融资，募资超过 500 亿元，估值超过 500 亿美元，当时由腾讯和宁德时代领投，并采用特殊架构让外部投资者不获投票权（据路透社及 TrendForce 报道）。本轮是该公司第二次融资，国资背景资金占比由首轮的约 2%升至约 27%。</p>
+<p><strong>「影响」</strong> 本轮国资背景资金占比从首轮的 2%升至约 27%，意味着政府相关基金在 DeepSeek 的持股与话语权明显上升，可能影响其后续融资节奏与芯片采购等战略选择。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.trendforce.com/news/2026/06/17/news-deepseek-completes-first-funding-round-raises-over-cny-50-billion-at-valuation-above-cny-330-billion/">[News] DeepSeek Completes First Funding Round, Raises Over ...</a></li>
+<li><a href="https://business20channel.tv/deepseek-2026-74b-first-round-at-59b-led-by-tencent-catl-04-06-2026">DeepSeek 2026: $7.4B First Round at $59B Led by Tencent, CATL</a></li>
+<li><a href="https://www.reuters.com/world/asia-pacific/chinas-deepseek-closes-over-7-billion-funding-with-unusual-deal-structure-2026-06-16/">China&#x27;s DeepSeek closes over $7 billion funding with unusual ...</a></li>
+<li><a href="https://www.theinformation.com/articles/behind-deepseeks-16-billion-funding-chinese-tech-titans-state-players">Behind DeepSeek’s $16 Billion Funding: Chinese Tech Titans ...</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#AI financing</code>, <code>#DeepSeek</code>, <code>#private markets</code>, <code>#state-backed investment</code>, <code>#China tech</code></p>
+<hr />
+<p><a id="item-finance-news-2"></a></p>
+<h3><a href="https://www.cls.cn/detail/2519914">SpaceX 上季度约三分之一营收来自单一 AI 客户，据称为 Anthropic</a> ⭐️ 7.0/10</h3>
+<p>SpaceX 上周在申报文件中表示，上季度约 34.5% 的营收来自其 AI 部门（现名 Super Intelligence，提供算力服务）的单一客户；知情人士称该客户即 Anthropic。Anthropic 的 IPO 披露文件显示，其同意在截至 2029 年的合同期内最多支出 1205 亿美元，从今年 12 月起约合每月 31 亿美元。</p>
+<p>telegram · zaihuapd · 10月30日 06:20</p>
+<p><strong>「背景」</strong> 今年 5 月，Anthropic 与 SpaceX 签署协议，获得后者位于田纳西州孟菲斯、由 xAI 于 2024 年建成的 Colossus 1 数据中心的全部算力使用权（来源：tool-1-1、tool-1-2）。SpaceX 正把该数据中心业务扩展为对外出租算力的业务，并与 Anthropic、Google 等签署大额容量协议；有报道称，这些协议允许提前 90 天取消（来源：tool-1-3）。</p>
+<p><strong>「影响」</strong> 对 SpaceX 而言，单一客户贡献约三分之一营收意味着其 AI 算力业务高度依赖 Anthropic；若 Anthropic 行使 2027 年初起可提前 90 天通知取消合同的权利，SpaceX 该部分收入将面临直接冲击。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.cnbc.com/2026/05/06/anthropic-spacex-data-center-capacity.html">Anthropic, SpaceX announce compute deal, includes space ...</a></li>
+<li><a href="https://www.forbes.com/sites/jonmarkman/2026/05/06/anthropic-just-signed-a-compute-deal-with-elon-musks-spacex/">Anthropic Just Signed A Compute Deal With Elon Musk&#x27;s SpaceX</a></li>
+<li><a href="https://centralintelligence.co/datacenters/topics/spacex-bets-on-ai-compute-20260619">Colossus Leases Test SpaceX’s AI Bet | Data Centers | Central ...</a></li>
+<li><a href="https://finance.yahoo.com/technology/ai/articles/anthropic-discloses-120-5-billion-140613686.html?fr=sycsrp_catchall">Anthropic discloses up to $120.5 billion in SpaceX compute ... Anthropic’s IPO Filing Reveals Up to $120.5 Billion in ... Anthropic Reveals It Will Pay SpaceX Up to $120.5B for AI Compute Anthropic agrees to spend up to $120.5 billion on SpaceX ... Anthropic to Pay SpaceX Up to $120.5B for AI Compute Through 2029 Anthropic Is Now SpaceX’s Biggest Customer, Ahead of the U.S ... Anthropic commits up to $120.5B to SpaceX for GPU compute</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#AI compute</code>, <code>#SpaceX</code>, <code>#Anthropic</code>, <code>#customer concentration</code>, <code>#data centers</code></p>
+<hr />
+<p><a id="item-finance-news-3"></a></p>
+<h3><a href="https://view.inews.qq.com/k/20261030A0ASEC00?scene=wap&amp;amp;no-redirect=1">证监会党委会议：全力稳市场稳预期，深化投融资改革</a> ⭐️ 7.0/10</h3>
+<p>10 月 30 日，证监会党委书记、主席吴清主持召开党委（扩大）会议，传达贯彻党的二十届五中全会精神，会议要求全力稳市场稳预期、深化投融资综合改革、完善全链条监管体系，并称要持续提升资本市场韧性和信心。会议未公布具体措施、量化目标或时间表。</p>
+<p>telegram · zaihuapd · 10月30日 10:00</p>
+<p><strong>「背景」</strong> 证监会此次会议旨在传达学习 10 月 26 日至 29 日在北京举行的党的二十届五中全会精神，并研究部署贯彻落实工作。会议同时提出，要把学习贯彻全会精神作为重大政治任务，确保「十五五」开局之年资本市场各项任务圆满完成。</p>
+<p><strong>「影响」</strong> 证监会此次表态未公布具体措施、数字或时间表，因此对投资者和市场的实际影响尚不明确；其“稳市场稳预期”的提法与此前监管层传递“政策底”信号的表述一致。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://finance.eastmoney.com/a/202610303916585451.html">证监 会 ： 全 力 稳 市 场 稳 预 期 持续提升 资 本 市 场 韧性和信心 _ 东方财富网</a></li>
+<li><a href="https://www.cls.cn/detail/2520784">证监 会 ： 全 力 稳 市 场 稳 预 期 持续提升 资 本 市 场 韧性和信心</a></li>
+<li><a href="https://www.gov.cn/yaowen/liebiao/202610/content_7084479.htm">中 国共产 党 第 二 十 届 中 央 委 员 会 第 五 次 全 体 会 议 公报__ 中 国政府网</a></li>
+<li><a href="https://jingji.cctv.cn/2026/07/23/ARTIfFvBfQwVlbU9r54sV3Jk260722.shtml">jingji.cctv.cn/ 2026 /07/23/ARTIfFvBfQwVlbU9r54sV3Jk260722.shtml</a></li>
+<li><a href="https://www.cls.cn/detail/2520784">证 监 会 ：全力 稳 市 场 稳 预 期 持续提升 资 本 市 场 韧性和信心</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#China policy</code>, <code>#CSRC</code>, <code>#capital markets</code>, <code>#regulatory reform</code>, <code>#market stability</code></p>
+<hr />
+<p><a id="item-finance-news-4"></a></p>
+<h3><a href="https://weibo.com/1642634100/Rp6qUwLKa">四家日系车企在华产量降至峰值四成以下</a> ⭐️ 7.0/10</h3>
+<p>2026 年 4 月至 9 月，丰田、本田、日产和马自达在华合计产量约 102 万辆，同比下降 32%，创 2008 年以来同期新低，不足 2020 年同期峰值的四成。本田同期在华产量约 13.2 万辆，同比下降 60%，并计划将在华燃油车年产能从 149 万辆削减至 100 万辆。</p>
+<p>telegram · zaihuapd · 10月30日 13:38</p>
+<p><strong>「背景」</strong> 这四家日本车企曾在中国市场占据较大份额，2020 年同期产量是近年高点；如今产量大幅回落，本田削减燃油车产能的计划也反映出其正在收缩在华燃油车业务规模。</p>
+<p><strong>「影响」</strong> 本田削减燃油车产能，意味着其在华燃油车相关工厂和供应链的用工与配套需求可能随之减少。</p>
+<p><strong>标签</strong>: <code>#automotive</code>, <code>#China</code>, <code>#production</code>, <code>#Japan automakers</code>, <code>#capacity cuts</code></p>
+<hr />
+<p><a id="item-finance-news-5"></a></p>
+<h3><a href="https://www.assemblee-nationale.fr/dyn/17/amendements/3210A/AN/1358">法国国民议会通过数据流量税修正案</a> ⭐️ 7.0/10</h3>
+<p>法国国民议会通过一项预算修正案，拟对内容供应商向互联网用户发送的数据按每 GB 0.055 欧元征税，并设置与企业营业额挂钩的税额上限；提案方预计每年可带来 100 亿欧元税收，但该修正案尚须经过后续立法程序，可能被修改或删除。</p>
+<p>telegram · zaihuapd · 10月31日 02:05</p>
+<p><strong>「背景」</strong> 该修正案是法国 2027 年预算案审议中的一项修正案，在国民议会获得通过，但法国预算立法还需经过后续议会程序，修正案内容可能被修改或删除。</p>
+<p><strong>「潜在影响」</strong> 若该修正案最终生效，Netflix、Google 等向法国用户传输内容的大型平台将按流量缴税，税额上限为法国营收的 15%或全球营收的 2%；电信运营商负责统计流量，平台承担税负。提案方称，按法国每年约 2000 亿 GB 的流量估算，年税收可达约 100 亿欧元，但该数字为预测，且修正案仍可能被修改或删除。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.investmentwatchblog.com/french-lawmakers-vote-11-10-to-tax-netflix-and-google-e0-055-per-gb-of-data-sent-to-users-big-platforms-pay-users-may-still-feel-it/">French lawmakers vote 11-10 to tax Netflix and Google €0.055 ...</a></li>
+<li><a href="https://www.dawnliphardt.com/parliament-approves-bandwidth-tax/">Parliament Approves Bandwidth Tax - Dawn Liphardt</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#法国</code>, <code>#数据流量税</code>, <code>#税收政策</code>, <code>#互联网内容供应商</code>, <code>#立法程序</code></p>
+<hr />
+<p><a id="item-finance-news-6"></a></p>
+<h3><a href="https://www.ft.com/content/7a3ad950-1b3b-4d9e-8c15-65a61ae6180f?syn-25a6b1a6=1">OpenAI 据称将融资目标下调 100 亿美元</a> ⭐️ 7.0/10</h3>
+<p>据知情人士透露，OpenAI 将新一轮融资目标从 300 亿美元下调至约 200 亿美元，估值也从原定的 1.4 万亿美元降至 1.25 万亿美元。</p>
+<p>telegram · zaihuapd · 10月31日 03:27</p>
+<p><strong>「背景」</strong> 报道称，部分投资者削减了认购额，首批融资预计不足 200 亿美元，后续向富裕个人开放认购后总额才可能达到约 200 亿美元；与此同时，科技股遭遇抛售，市场对 AI 支出规模的担忧上升。</p>
+<p><strong>标签</strong>: <code>#OpenAI</code>, <code>#AI financing</code>, <code>#private markets</code>, <code>#tech selloff</code>, <code>#valuation</code></p>
+<hr />
+</main></body></html>
