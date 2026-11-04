@@ -1,0 +1,172 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horizon 每日速递 - 2026-11-04</title><style>:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.72;background:#f5f7fb;color:#172033}main{max-width:920px;margin:32px auto;padding:38px 48px;background:#fff;border-radius:16px;box-shadow:0 8px 30px #1f29371a}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}h1,h2,h3{line-height:1.35;color:#0f172a}h1{border-bottom:1px solid #e5e7eb;padding-bottom:18px}h2{margin-top:42px}h3{margin-top:30px}blockquote{margin:20px 0;padding:12px 18px;border-left:4px solid #3b82f6;background:#eff6ff;color:#334155}code{padding:2px 6px;border-radius:5px;background:#eef2f7}hr{border:0;border-top:1px solid #e5e7eb;margin:36px 0}details{margin:14px 0;padding:10px 14px;border:1px solid #e5e7eb;border-radius:8px}nav{max-width:920px;margin:24px auto 0;padding:0 8px}nav a{font-weight:600}@media(max-width:720px){main{margin:12px;padding:24px 18px;border-radius:0}}@media(prefers-color-scheme:dark){body{background:#0b1120;color:#dbe4f0}main{background:#111827}h1,h2,h3{color:#f8fafc}blockquote{background:#172554;color:#dbeafe}code{background:#263244}details,h1,hr{border-color:#334155}}</style></head><body><nav><a href="/">← 返回 JerryMouseZ 首页</a></nav><main><h1>Horizon 每日速递 - 2026-11-04</h1>
+<blockquote>
+<p>从 38 条内容中筛选出 15 条重要资讯。</p>
+</blockquote>
+<hr />
+<p><strong>科技新闻</strong></p>
+<ol>
+<li><a href="#item-tech-news-1">《PostgreSQL 内部原理》在线书再获关注</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-2">Postman 被指静默安装 AI 插件并上传 API 数据</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-3">在数据中心规模化运行 Mac 的工程实践</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-4">Qwen 3.8 27B 在笔记本上也能解读模型权重</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-5">博客指“Astra 读写权重改进 Qwen”说法有误导性</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-6">I discovered a sound that leaks your exact location (and it&amp;#x27;s everywhere) - YouTube</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-7">Elon Is Doing It Again: SpaceX Will Be The World’s Biggest AI Cloud</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-8">A new, open-weights 278M PII detection model and reference benchmark [R]</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-9">We turned 10 years of ML papers into one page per topic: benchmark records, what got tried, what reviewers expect [P]</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-10">普京下令俄罗斯私营数据中心预留 10%算力，政府可在 24 小时内征用以保障 IT 基础设施运行</a> ⭐️ 7.0/10</li>
+<li><a href="#item-tech-news-11">👁️ 传英伟达要求数据中心中国企业业务不超 49%</a> ⭐️ 7.0/10</li>
+</ol>
+<p><strong>财经新闻</strong></p>
+<ol>
+<li><a href="#item-finance-news-1">Blackstone president calls for more equity to fund AI buildout as debt risks mount</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-2">中兴拟成立合资公司出售手机业务，估值约 400 亿</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-3">🤖 Anthropic 员工人均月成本超 10 万美元</a> ⭐️ 7.0/10</li>
+<li><a href="#item-finance-news-4">韩国拨款 4.7 万亿韩元打造主权 AI 模型</a> ⭐️ 7.0/10</li>
+</ol>
+<hr />
+<h2>科技新闻</h2>
+<p><a id="item-tech-news-1"></a></p>
+<h3><a href="https://www.interdb.jp/pg/index.html">《PostgreSQL 内部原理》在线书再获关注</a> ⭐️ 7.0/10</h3>
+<p>Hacker News 上再次出现了《The Internals of PostgreSQL》在线书的链接，这是一份详细讲解 PostgreSQL 内部架构的技术参考，涵盖 MVCC、HOT 更新等机制。该帖本身没有附带新的版本发布或实测数据，讨论主要围绕书中章节的实用价值展开。评论者指出，HOT 章节最具直接实践意义：只有当更新不涉及任何被索引的列、且新元组能放入同一页面时，HOT 才会生效。</p>
+<p>hackernews · ibobev · 11月3日 21:51 · <a href="https://news.ycombinator.com/item?id=50358702">社区讨论</a></p>
+<p><strong>「背景」</strong> 《The Internals of PostgreSQL》是 Hironobu Suzuki 维护的在线技术书，目标读者是数据库管理员和系统开发者，旨在逐个子系统解释 PostgreSQL 的工作机制并给出整体架构图景。该书此前已多次在 Hacker News 上被讨论，评论中 dang 列出了 2019 年 1 月、2022 年 1 月、2022 年 2 月和 2025 年 3 月的往期帖子链接。</p>
+<p><strong>「升级与运维要点」</strong> 对使用全文检索或 pg_trgm 的 PostgreSQL 集群，PostgreSQL 18 将全文检索改为使用集群默认排序规则提供方而非始终使用 libc，官方发布说明建议在 pg_upgrade 后重建所有全文检索和 pg_trgm 相关索引。评论者还指出，HOT 更新仅在无索引列变更且新元组能放入同一页面时生效，因此对频繁更新的列建索引会抑制 HOT，可通过在更新密集的表上设置 80–90 的 fillfactor 留出页内空间，并用 pg_stat_user_tables 中的 n_tup_hot_upd 与 n_tup_upd 对比来观察效果。</p>
+<p><strong>「社区讨论」</strong> 有评论者建议先读 HOT 更新路径，再结合 zHeap 与 TOAST 的实现笔记，以建立对 PostgreSQL 能力边界的整体认识；也有人认为，在频繁更新的列（如 status、updated_at）上建索引会悄悄让该表的每次更新都无法走 HOT，而在更新密集的表上把 fillfactor 降到 80–90 可以为 HOT 留出空间，并可通过 pg_stat_user_tables 中 n_tup_hot_upd 与 n_tup_upd 的对比来低成本验证。另有评论称书中未涵盖新的 MVCC 实现，并指向 OrioleDB；还有评论提到，PostgreSQL 18 中全文检索改为通过集群默认排序规则提供方读取字典和配置，使用 ICU 或 PG_UNICODE_FAST 的集群在 FTS 与 pg_trgm 上可能出现行为差异，升级后需重建相关索引。这些说法来自评论者，未经独立核实。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.interdb.jp/pg/">Hironobu SUZUKI @ InterDB</a></li>
+<li><a href="https://freecomputerbooks.com/The-Internals-of-PostgreSQL.html">The Internals of PostgreSQL - for Database Administrators and ...</a></li>
+<li><a href="https://www.postgresql.org/docs/current/release-18.html">PostgreSQL: Documentation: 18: E.6. Release 18</a></li>
+<li><a href="https://www.postgresql.org/about/news/postgresql-18-released-3142/">PostgreSQL 18 Released!</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#postgresql</code>, <code>#databases</code>, <code>#database-internals</code>, <code>#mvcc</code>, <code>#technical-reference</code></p>
+<hr />
+<p><a id="item-tech-news-2"></a></p>
+<h3><a href="https://github.com/postmanlabs/postman-app-support/issues/14370">Postman 被指静默安装 AI 插件并上传 API 数据</a> ⭐️ 7.0/10</h3>
+<p>一个 GitHub issue 与 Hacker News 讨论指控 Postman 静默安装 AI 插件，并将 API 数据发送至其服务器，其中包括通过模板语法填入的密钥内容。评论者称，Postman 会记录每次 API 请求的详细信息，包括查询参数；若使用 {{some_secret}} 这类模板填充查询参数，实际密钥值也会被发送到 Postman 服务器。另有评论称，屏蔽该日志端点会导致应用无法正常工作。上述说法来自用户报告与社区讨论，并非独立验证的测量结果。</p>
+<p>hackernews · sidgarimella · 11月3日 17:22 · <a href="https://news.ycombinator.com/item?id=50354960">社区讨论</a></p>
+<p><strong>「背景」</strong> 该报告指向 Postman 桌面应用支持仓库中的 issue #14370，标题称桌面端会自动安装 Codex/Claude 插件，并附有安装器源码中相关文件的链接。Postman 官方下载页也提供了通过 Claude 插件安装 Postman 的说明，显示其正将 AI 代理接入纳入产品流程。</p>
+<p><strong>「实际影响」</strong> 对于在请求中使用 `{{some_secret}}` 等模板变量填充查询参数的团队，社区报告称实际密钥内容会被发送至 Postman 服务器，且阻断该日志端点会导致应用无法正常工作，因此需要评估在敏感或受监管环境中继续使用的风险。已有医疗行业用户表示其网络安全团队因此取消了 Postman 的使用资格并迁移至 Bruno；这类迁移决定属于用户自述，并非厂商确认的合规结论。</p>
+<p><strong>「社区反应」</strong> 多名评论者表示已迁移到 Bruno，理由包括 Postman 变慢、臃肿，以及医疗行业团队因其不符合 HIPAA 要求而将其除名。也有评论认为，将请求定义存入 git 是 Bruno 的实用优势，并质疑是否还需要这类工具。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://github.com/postmanlabs/postman-app-support/issues/14370">[SEVERE] Desktop auto - installs Codex/Claude plugins ; installer...</a></li>
+<li><a href="https://www.postman.com/downloads/">Download Postman | Get Started for Free</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#privacy</code>, <code>#security</code>, <code>#api-tools</code>, <code>#postman</code>, <code>#developer-tools</code></p>
+<hr />
+<p><a id="item-tech-news-3"></a></p>
+<h3><a href="https://namespace.so/blog/mac-at-any-scale">在数据中心规模化运行 Mac 的工程实践</a> ⭐️ 7.0/10</h3>
+<p>Namespace 发布了一篇工程文章，介绍如何在数据中心规模下运行 Mac，以支撑 iOS 构建与测试工作负载。文章详细描述了为绕开 Apple 平台自身的缺陷和限制而搭建的各类变通方案，并涉及跨平台编译等替代路径。由于没有原文正文，具体版本、机型数量、性能数字和可用性条件均无法核实，只能确认这是一份面向基础设施与移动构建工程师的实践记录。</p>
+<p>hackernews · anner_ · 11月3日 14:53 · <a href="https://news.ycombinator.com/item?id=50352758">社区讨论</a></p>
+<p><strong>「背景」</strong> 苹果的构建工具链长期要求 iOS 应用在 Mac 硬件上编译和签名，这使持续集成与测试必须依赖真实的 Mac 设备。Namespace 此前已提供在 macOS 实例上通过 Compute API 直接运行自有应用的能力，其文档于 2026 年 9 月描述了这一架构。此次博文则进一步说明该公司如何把 MacBook 装入机架、借助苹果 Virtualization 框架虚拟化 macOS，并在整个机群中构建和分发大型虚拟机镜像。</p>
+<p><strong>「对构建团队的影响」</strong> 对依赖 Mac 机群的 iOS/macOS CI 团队而言，这篇文章的价值在于把 Apple 工具链的缺陷和运维绕行方案具体化，便于评估自建机群的隐性成本。评论中有人指出“没有 Mac 就无法构建 iOS 应用”并非绝对，并给出基于 Linux 主机的交叉编译工具链作为替代路径；但这类方案在签名、设备部署等环节仍需与 Apple 服务对接，是否适用于生产流水线需自行验证。</p>
+<p><strong>「社区讨论」</strong> 评论者普遍认为，文章的价值在于揭示了为绕开 Apple 自身缺陷所需付出的额外工程成本；kccqzy 推测，即使 Apple 推出性能与 Mac mini 相当、价格翻倍的新 Xserve，仍会有人购买，因为自建数据中心运维本身就很昂贵。shepherdjerred 反驳了“没有 Mac 就无法构建 iOS 应用”的说法，并给出自己用 Linux 主机交叉编译 C/C++/Fortran 到 macOS 的工具链网站作为反例；borschtplease 则批评 Xcode Cloud 和 Apple 的自动化、签名体系难以支撑工程化需求。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://namespace.so/blog/mac-at-any-scale">Mac at any scale - namespace.so</a></li>
+<li><a href="https://namespace.so/docs/architecture/compute/macos">macOS - Namespace Documentation</a></li>
+<li><a href="https://coderivers.org/blog/compile-ios-program-from-linux-commandline/">Compile iOS Program from Linux Command Line: Is It Possible ...</a></li>
+<li><a href="https://github.com/xtool-org/xtool">GitHub - xtool-org/xtool: Cross-platform Xcode replacement ...</a></li>
+<li><a href="https://github.com/arxdeus/xcross">GitHub - arxdeus/xcross: Run and debug cross-platform ...</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#macos</code>, <code>#ci-cd</code>, <code>#infrastructure</code>, <code>#ios-development</code>, <code>#apple</code></p>
+<hr />
+<p><a id="item-tech-news-4"></a></p>
+<h3><a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/">Qwen 3.8 27B 在笔记本上也能解读模型权重</a> ⭐️ 7.0/10</h3>
+<p>Simon Willison 复现了 Rikiya Takehi 等人“Weight-Space Programming”博文中的实验：把四个小型游戏策略网络的原始浮点权重直接作为文本提示交给模型，要求它在无工具、单次回答的条件下判断网络训练的是哪款游戏。他用 LM Studio 在本机运行 17GB 的 Qwen 3.8 27B（需调大默认 8192 上下文并延长超时），模型在 46 分 12 秒、43,506 个推理 token 后识别出 Pac-Man，并称其置信度为 72%，随后又识别出 Pong。作为对照，Kimi K3.1 Pro 经 OpenRouter 在 9 分 41 秒、19,493 个推理 token 后猜中 Breakout。原论文称 GPT-6 Astra 能仅凭权重判断网络用途，并能在不提供梯度的情况下修改 Qwen3.5-0.8B 的 0.016% 权重，将 MATH-500 从 7.9% 提升到 48.1%；但作者自己将该文归类为“博客文章”，且该结果尚未经过同行评审。</p>
+<p>rss · Simon Willison · 11月3日 16:29 · <a href="https://news.ycombinator.com/item?id=50355251">社区讨论</a></p>
+<p><strong>「背景」</strong> Willison 测试的是 Rikiya Takehi、Jayden Teoh、Alex Zhang 和 Omar Khattab 发布的《Sparks of Weight-Space Programming》，该文提出“权重空间编程”一词，称 GPT-6 Astra 仅凭原始浮点权重就能判断网络训练目标，并能在不运行训练循环的情况下直接改写权重。作者自己将该文归类为“博客文章”而非同行评审论文，且文中把“无工具读权重”与“借助代码改权重”两类能力合并讨论，已受到 Matthew Honnibal 和 Sean Goedecke 的质疑。Willison 的测试只针对前一类：论文仓库 exp1_which_game 提供了四个 10x10 网格游戏策略网络的权重提示词，要求模型在无代码执行、单次回答的条件下判断游戏名称。</p>
+<p><strong>「实际影响」</strong> 对本地部署者而言，这一演示说明无需工具、仅凭原始权重做游戏识别，在消费级硬件上已可复现，但代价是耗时：Qwen 3.8 27B 在笔记本上用了 46 分 12 秒、43,506 个推理 token 才给出 Pac-Man 判断，且需把上下文窗口调离默认的 8192 才能运行。批评者指出，论文中“无工具”设定只用于约 1.7 万至 17.2 万权重的玩具网络，涉及真实语言模型的实验都借助了 Python 等工具，因此不应把本地演示外推为模型能直接改写自身权重。</p>
+<p><strong>「社区讨论」</strong> 有评论者借用《亨利四世》中“我能召唤深渊中的幽灵”的台词质疑：模型给出的解读是否真的正确，而不只是听起来合理。也有人追问 Qwen 3.8 能否修改自身权重，以及这类能力在多大程度上来自训练而非真正的权重理解，并提到 steering vector、LoRA 等既有手段。另有观点认为，围绕这一方向的讨论更多是在押注即将到来的范式转变，而非当前技术水平。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://rikiyat.github.io/blog/weight-space-programming/">Sparks of Weight - Space Programming : LLMs can natively read ...</a></li>
+<li><a href="https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/">Qwen 3.8 27B on my laptop can interpret model weights , too</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Weight-space_programming">Weight-space programming - Wikipedia</a></li>
+<li><a href="https://honnibal.dev/blog/astra-read-write-misleading">The &#x27;Astra can read and write weights to improve Qwen&#x27; post ...</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#model-interpretability</code>, <code>#weight-space-programming</code>, <code>#open-models</code>, <code>#local-llm</code>, <code>#research</code></p>
+<hr />
+<p><a id="item-tech-news-5"></a></p>
+<h3><a href="https://honnibal.dev/blog/astra-read-write-misleading">博客指“Astra 读写权重改进 Qwen”说法有误导性</a> ⭐️ 7.0/10</h3>
+<p>开发者 honnibal 发表博客，批评此前一篇关于“Astra 能读写权重以改进 Qwen”的病毒式传播文章存在误导。据社区中一位自称从事机制可解释性研究的评论者 x313 分析，该工作的关键结果与提升 Qwen 的数学能力无关，实际效果只是减少推理循环——即模型生成用于结束推理的 &lt;/think&gt; 标记概率过低的问题，而这类问题可用简单的引导方法修复。由于原始来源内容未提供，目前无法独立核实双方的具体技术细节。</p>
+<p>hackernews · syllogism · 11月3日 12:21 · <a href="https://news.ycombinator.com/item?id=50351111">社区讨论</a></p>
+<p><strong>「背景」</strong> 争议源于 2026 年 11 月 2 日由四名 MIT CSAIL 研究者发布的一篇博客，该文声称前沿模型能够原生读取并改写小型模型的权重，并称 Astra 将 Qwen 3.5-0.8B 在 MATH-500 上的成绩从 7.9% 提升到 48.1%。Honnibal 的批评文章指出，读取原始权重的实验与修复 Qwen 的实验使用的是完全不同的技术，因此不能把两者合并为同一项“原生读写权重”的能力。</p>
+<p><strong>「影响」</strong> 对关注该研究的读者而言，评估结论时应区分“减少推理循环”与“提升数学能力”这两类不同效果，避免依据标题或摘要形成判断。评论者 phoghed 指出，原文在正文中其实已说明相关机制，只读标题和开头容易得到不完整的印象。</p>
+<p><strong>「社区讨论」</strong> 从事机制可解释性研究的评论者 x313 认同原文有夸大成分，并称减少推理循环是相对简单的问题。评论者 neom 认为这套权重编辑方法是对已有技术的复述，并引用了相关论文；phoghed 则认为原文正文已解释清楚，问题主要出在标题和摘要。另有评论者 bushido 分享了自己数周传统训练未能达到可用效果的经历，GavinAnderegg 则表示仍对“权重空间编程”这一思路印象深刻。</p>
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://honnibal.dev/blog/astra-read-write-misleading">The &#x27; Astra can read and write weights to improve Qwen &#x27; post is...</a></li>
+<li><a href="https://explainx.ai/blog/weight-space-programming-gpt-6-astra-edits-qwen3-5-0-8b-weights-math-7-9-to-48-1-mit-csail-2026">GPT-6 Astra Edits Qwen Weights : MATH-500 7.9% to... | explainx.ai</a></li>
+</ul>
+</details>
+<p><strong>标签</strong>: <code>#mechanistic-interpretability</code>, <code>#LLM-research</code>, <code>#research-criticism</code>, <code>#Qwen</code>, <code>#AI-claims</code></p>
+<hr />
+<p><a id="item-tech-news-6"></a></p>
+<h3><a href="https://simonwillison.net/2026/Nov/3/a-sound-that-leaks-your-exact-location/">I discovered a sound that leaks your exact location (and it&amp;#x27;s everywhere) - YouTube</a> ⭐️ 7.0/10</h3>
+<p>A short link post highlighting an OSINT demonstration that geolocates videos by matching faint aircraft background noise and Doppler curves against ADS-B flight data.</p>
+<p>rss · Simon Willison · 11月3日 05:32</p>
+<p><strong>标签</strong>: <code>#privacy</code>, <code>#OSINT</code>, <code>#audio-analysis</code>, <code>#ADS-B</code>, <code>#geolocation</code></p>
+<hr />
+<p><a id="item-tech-news-7"></a></p>
+<h3><a href="https://newsletter.semianalysis.com/p/elon-is-doing-it-again-spacex-will">Elon Is Doing It Again: SpaceX Will Be The World’s Biggest AI Cloud</a> ⭐️ 7.0/10</h3>
+<p>SemiAnalysis argues SpaceX&amp;#x27;s AI datacenter buildout is accelerating, citing 3.6GW under construction and a revised ~13GW target for 2027 that could make it the largest AI cloud.</p>
+<p>rss · Semianalysis · 11月3日 20:44</p>
+<p><strong>标签</strong>: <code>#AI infrastructure</code>, <code>#datacenters</code>, <code>#SpaceX</code>, <code>#compute scaling</code>, <code>#industry analysis</code></p>
+<hr />
+<p><a id="item-tech-news-8"></a></p>
+<h3><a href="https://www.reddit.com/r/MachineLearning/comments/1xn2lro/a_new_openweights_278m_pii_detection_model_and/">A new, open-weights 278M PII detection model and reference benchmark [R]</a> ⭐️ 7.0/10</h3>
+<p>A Reddit post announcing an open-weights 278M RoBERTa-based PII detection model, a synthetic-data benchmark (PII-SCOPE), and a technical report, all released publicly.</p>
+<p>reddit · r/MachineLearning · /u/shanekj · 11月3日 19:29</p>
+<p><strong>标签</strong>: <code>#PII detection</code>, <code>#open-weights models</code>, <code>#benchmarks</code>, <code>#privacy</code>, <code>#NLP</code></p>
+<hr />
+<p><a id="item-tech-news-9"></a></p>
+<h3><a href="https://www.reddit.com/r/MachineLearning/comments/1xmk8rx/we_turned_10_years_of_ml_papers_into_one_page_per/">We turned 10 years of ML papers into one page per topic: benchmark records, what got tried, what reviewers expect [P]</a> ⭐️ 7.0/10</h3>
+<p>A launch post for a research atlas that groups roughly 109k ML papers from major conferences into ~1,260 topic pages with benchmark records, ablations, and baseline comparisons.</p>
+<p>reddit · r/MachineLearning · /u/latenticlabs · 11月3日 05:09</p>
+<p><strong>标签</strong>: <code>#machine-learning</code>, <code>#research-tools</code>, <code>#literature-analysis</code>, <code>#benchmarks</code>, <code>#gaussian-splatting</code></p>
+<hr />
+<p><a id="item-tech-news-10"></a></p>
+<h3><a href="https://www.reuters.com/technology/putin-orders-private-data-centres-set-aside-10-capacity-support-it-2026-11-02/">普京下令俄罗斯私营数据中心预留 10%算力，政府可在 24 小时内征用以保障 IT 基础设施运行</a> ⭐️ 7.0/10</h3>
+<p>Putin signed a decree requiring non-state Russian data centers to reserve 10% of space and compute capacity for government requisition within 24 hours, with the Digital Development Ministry inventorying private capacity and FSB approval needed to tap overseas data center resources.</p>
+<p>telegram · zaihuapd · 11月3日 10:58</p>
+<p><strong>标签</strong>: <code>#data centers</code>, <code>#cloud infrastructure</code>, <code>#regulation</code>, <code>#Russia</code>, <code>#compute capacity</code></p>
+<hr />
+<p><a id="item-tech-news-11"></a></p>
+<h3><a href="https://www.tomshardware.com/tech-industry/data-centers/nvidia-tells-data-center-operators-to-limit-business-from-chinese-customers-with-new-global-restrictions-report-claims-allegedly-restricted-to-49-percent-of-the-total-ensuring-51-percent-are-non-chinese-outfits">👁️ 传英伟达要求数据中心中国企业业务不超 49%</a> ⭐️ 7.0/10</h3>
+<p>Nvidia reportedly asked global data center operators to cap Chinese customer business at 49% for new contracts, per an FT report relayed via Telegram.</p>
+<p>telegram · zaihuapd · 11月3日 16:19</p>
+<p><strong>标签</strong>: <code>#nvidia</code>, <code>#ai-infrastructure</code>, <code>#data-centers</code>, <code>#export-controls</code>, <code>#china</code></p>
+<hr />
+<h2>财经新闻</h2>
+<p><a id="item-finance-news-1"></a></p>
+<h3><a href="https://www.cnbc.com/2026/11/03/equity-ai-debt-blackstone-pimco-financing.html">Blackstone president calls for more equity to fund AI buildout as debt risks mount</a> ⭐️ 7.0/10</h3>
+<p>Blackstone&amp;#x27;s Jon Gray and Pimco&amp;#x27;s Emmanuel Roman warned at an HKMA summit that the AI infrastructure buildout will require more equity financing as debt exposure and concentration risks grow, citing large capital estimates.</p>
+<p>rss · CNBC Finance · 11月3日 06:46</p>
+<p><strong>标签</strong>: <code>#AI infrastructure</code>, <code>#private credit</code>, <code>#debt markets</code>, <code>#capital spending</code>, <code>#financial stability</code></p>
+<hr />
+<p><a id="item-finance-news-2"></a></p>
+<h3><a href="https://wap.cj.sina.cn/pc/7x24/5190876">中兴拟成立合资公司出售手机业务，估值约 400 亿</a> ⭐️ 7.0/10</h3>
+<p>ZTE is reportedly negotiating a joint venture with a major internet company and Shanghai state capital to house and sell its handset business at a proposed valuation of about RMB 40 billion, with terms still unsettled.</p>
+<p>telegram · zaihuapd · 11月3日 11:47</p>
+<p><strong>标签</strong>: <code>#ZTE</code>, <code>#smartphones</code>, <code>#joint venture</code>, <code>#M&amp;amp;A</code>, <code>#China tech</code></p>
+<hr />
+<p><a id="item-finance-news-3"></a></p>
+<h3><a href="https://www.businessinsider.com/anthropic-ipo-filing-q3-personnel-costs-2026-11">🤖 Anthropic 员工人均月成本超 10 万美元</a> ⭐️ 7.0/10</h3>
+<p>Anthropic&amp;#x27;s amended S-1 reportedly shows $1.7 billion in personnel costs for 5,300 employees in Q3 2026, including $1.1 billion in stock-based compensation, with an IPO expected this month.</p>
+<p>telegram · zaihuapd · 11月3日 13:23</p>
+<p><strong>标签</strong>: <code>#Anthropic</code>, <code>#IPO</code>, <code>#stock-based compensation</code>, <code>#AI industry</code>, <code>#corporate filings</code></p>
+<hr />
+<p><a id="item-finance-news-4"></a></p>
+<h3><a href="https://mp.weixin.qq.com/s/EldaEmYwi1eXuqkR2il-2A">韩国拨款 4.7 万亿韩元打造主权 AI 模型</a> ⭐️ 7.0/10</h3>
+<p>South Korea&amp;#x27;s president announced 4.7 trillion won to develop a sovereign AI model as part of the country&amp;#x27;s largest-ever budget, which also nearly doubles semiconductor and AI infrastructure investment to 21.3 trillion won.</p>
+<p>telegram · zaihuapd · 11月4日 03:07</p>
+<p><strong>标签</strong>: <code>#AI policy</code>, <code>#South Korea</code>, <code>#government budget</code>, <code>#semiconductors</code>, <code>#industrial policy</code></p>
+<hr />
+</main></body></html>
